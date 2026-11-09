@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 860" width="1280" height="860" font-family="Helvetica, Arial, sans-serif">
+  <title>Arquitetura geral da solucao, com as 4 areas</title>
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#333"/>
+    </marker>
+    <marker id="setaIA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5E4396"/>
+    </marker>
+    <marker id="setaDados" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1C6E6E"/>
+    </marker>
+    <style>
+      .area { fill: none; stroke-width: 2; rx: 14; }
+      .caixa { fill: #FFFFFF; stroke: #9AA39A; stroke-width: 1.2; rx: 10; }
+      .tituloArea { font-size: 15px; font-weight: 700; }
+      .nome { font-size: 15px; font-weight: 700; fill: #1E2A1E; }
+      .det { font-size: 12.5px; fill: #44504A; }
+      .rot { font-size: 12px; fill: #222; }
+      .num { font-size: 12px; font-weight: 700; fill: #FFFFFF; }
+      .linha { stroke: #333; stroke-width: 1.6; fill: none; }
+      .linhaIA { stroke: #5E4396; stroke-width: 1.8; fill: none; }
+      .linhaDados { stroke: #1C6E6E; stroke-width: 1.8; fill: none; }
+      .tracejada { stroke-dasharray: 6 4; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="860" fill="#FAF8F3"/>
+  <text x="40" y="44" font-size="22" font-weight="700" fill="#1E2A1E">Arquitetura geral · irrigação na medida para o agricultor familiar</text>
+  <text x="40" y="68" font-size="14" fill="#44504A">As 4 áreas resolvem o mesmo problema: quando e quanto regar a horta. Roxo: a IA usa os dados do pipeline. Verde-azulado: o sensor chega ao painel.</text>
+
+  <!-- ============ CAMPO ============ -->
+  <rect x="30" y="96" width="290" height="520" rx="14" fill="#F1ECE0" stroke="#B8A98A" stroke-width="2"/>
+  <text x="48" y="122" class="tituloArea" fill="#7A6438">No campo</text>
+
+  <rect x="50" y="138" width="250" height="88" class="caixa"/>
+  <text x="66" y="162" class="nome">Produtor (Seu Jorge)</text>
+  <text x="66" y="182" class="det">2 há de folhosas, celular Android,</text>
+  <text x="66" y="198" class="det">sinal fraco. Usa o app da Área 3.</text>
+  <text x="66" y="214" class="det">Rega e registra: "reguei".</text>
+
+  <rect x="50" y="252" width="250" height="150" class="caixa"/>
+  <text x="66" y="276" class="nome">Nó de sensores (Arduino)</text>
+  <text x="66" y="296" class="det">TinkerCad · Área 3 (IoT)</text>
+  <text x="66" y="316" class="det">A0 umidade do solo</text>
+  <text x="66" y="333" class="det">A1 TMP36 temperatura do ar</text>
+  <text x="66" y="350" class="det">A2 fotoresistor (luz do sol)</text>
+  <text x="66" y="367" class="det">LED: solo seco (funciona offline)</text>
+  <text x="66" y="388" class="det">Saída: JSON na serial a cada 2 s</text>
+
+  <rect x="50" y="424" width="250" height="96" class="caixa"/>
+  <text x="66" y="448" class="nome">Simulador dos sensores</text>
+  <text x="66" y="468" class="det">Python (mock), mesmo JSON do Arduino</text>
+  <text x="66" y="485" class="det">Sem conexão: guarda e reenvia.</text>
+  <text x="66" y="502" class="det">Cenários: normal, seco, chuva.</text>
+
+  <rect x="50" y="540" width="250" height="60" class="caixa" stroke-dasharray="5 4"/>
+  <text x="66" y="564" class="nome">Open-Meteo (dado real)</text>
+  <text x="66" y="584" class="det">clima histórico e previsão, sem chave</text>
+
+  <!-- ============ AREA 3 ============ -->
+  <rect x="370" y="96" width="400" height="520" class="area" stroke="#2F6B3A"/>
+  <text x="388" y="122" class="tituloArea" fill="#2F6B3A">Área 3 · MVP, IoT e experiência digital</text>
+
+  <rect x="392" y="138" width="356" height="110" class="caixa"/>
+  <text x="408" y="162" class="nome">App (Expo: web e celular)</text>
+  <text x="408" y="182" class="det">Telas: Entrar · Meus canteiros · Hoje</text>
+  <text x="408" y="199" class="det">(sensor ao vivo + recomendação + "reguei")</text>
+  <text x="408" y="216" class="det">· Histórico (umidade e água gasta) · Novo canteiro</text>
+  <text x="408" y="236" class="det">Atualiza sozinho a cada 5 s</text>
+
+  <rect x="392" y="300" width="356" height="170" class="caixa"/>
+  <text x="408" y="324" class="nome">API REST (Java 17, Spring Boot)</text>
+  <text x="408" y="344" class="det">/api/auth (login JWT, senha BCrypt)</text>
+  <text x="408" y="361" class="det">/api/leituras (sensor, chave do canteiro)</text>
+  <text x="408" y="378" class="det">/api/canteiros/{id}/recomendacoes e /regas</text>
+  <text x="408" y="395" class="det">/api/dados/leituras (so tecnico, para o pipeline)</text>
+  <text x="408" y="412" class="det">Regra básica: plano B se a IA não responder</text>
+  <text x="408" y="429" class="det">/actuator/health · Swagger</text>
+  <text x="408" y="454" class="det">Validação de entrada em todo pedido</text>
+
+  <rect x="392" y="520" width="356" height="74" class="caixa"/>
+  <text x="408" y="544" class="nome">Banco de dados</text>
+  <text x="408" y="564" class="det">H2 (local, sem instalar) · PostgreSQL (Docker)</text>
+  <text x="408" y="581" class="det">usuarios · canteiros · leituras · recomendacoes · regas</text>
+
+  <!-- ============ AREA 1 ============ -->
+  <rect x="820" y="96" width="430" height="226" class="area" stroke="#5E4396"/>
+  <text x="838" y="122" class="tituloArea" fill="#5E4396">Área 1 · IA e automação</text>
+  <rect x="842" y="136" width="386" height="170" class="caixa"/>
+  <text x="858" y="160" class="nome">Serviço de IA (Python)</text>
+  <text x="858" y="180" class="det">POST /recomendar: regar hoje? quantos minutos?</text>
+  <text x="858" y="198" class="det">1. Modelo (árvore de decisão) treinado nos dados</text>
+  <text x="858" y="214" class="det">   tratados do pipeline</text>
+  <text x="858" y="232" class="det">2. Previsão de chuva (sem sinal: decide só pelo sensor)</text>
+  <text x="858" y="250" class="det">3. Explicação em linguagem simples (prompt</text>
+  <text x="858" y="266" class="det">   documentado; modo simulado sem chave de API)</text>
+  <text x="858" y="290" class="det">Medida: acerto x balanço hídrico e água antes x depois</text>
+
+  <!-- ============ AREA 2 ============ -->
+  <rect x="820" y="346" width="430" height="270" class="area" stroke="#1C6E6E"/>
+  <text x="838" y="372" class="tituloArea" fill="#1C6E6E">Área 2 · Big Data e visualização</text>
+  <rect x="842" y="386" width="386" height="132" class="caixa"/>
+  <text x="858" y="410" class="nome">Pipeline em camadas (Python)</text>
+  <rect x="858" y="424" width="100" height="44" rx="8" fill="#E8DCC8"/>
+  <text x="908" y="451" text-anchor="middle" class="rot">bronze (cru)</text>
+  <rect x="980" y="424" width="100" height="44" rx="8" fill="#DCE3E8"/>
+  <text x="1030" y="451" text-anchor="middle" class="rot">prata (limpo)</text>
+  <rect x="1102" y="424" width="110" height="44" rx="8" fill="#F2E3A6"/>
+  <text x="1157" y="451" text-anchor="middle" class="rot">ouro (por dia)</text>
+  <path d="M958 446 L978 446" class="linhaDados" marker-end="url(#setaDados)"/>
+  <path d="M1080 446 L1100 446" class="linhaDados" marker-end="url(#setaDados)"/>
+  <text x="858" y="492" class="det">leituras da API + clima · remove erro e duplicado</text>
+  <text x="858" y="508" class="det">água usada x recomendada · dias de estresse</text>
+
+  <rect x="842" y="532" width="386" height="68" class="caixa"/>
+  <text x="858" y="556" class="nome">Painel Power BI (técnico da cooperativa)</text>
+  <text x="858" y="575" class="det">3+ indicadores, filtros por produtor, cultura e período;</text>
+  <text x="858" y="591" class="det">medidas DAX (economia de água, % de dias em estresse)</text>
+
+  <!-- ============ SETAS ============ -->
+  <!-- produtor <-> app -->
+  <path d="M300 182 L390 190" class="linha" marker-start="url(#seta)" marker-end="url(#seta)"/>
+  <circle cx="345" cy="172" r="10" fill="#2F6B3A"/><text x="345" y="176" text-anchor="middle" class="num">5</text>
+
+  <!-- sensores -> API -->
+  <path d="M300 330 L390 360" class="linhaDados" marker-end="url(#setaDados)"/>
+  <path d="M300 470 L390 400" class="linhaDados" marker-end="url(#setaDados)"/>
+  <circle cx="345" cy="322" r="10" fill="#1C6E6E"/><text x="345" y="326" text-anchor="middle" class="num">1</text>
+  <text x="326" y="296" class="rot">POST</text>
+  
+  <!-- app <-> API -->
+  <path d="M570 248 L570 298" class="linha" marker-start="url(#seta)" marker-end="url(#seta)"/>
+  <text x="580" y="270" class="rot">HTTPS + token JWT</text>
+  <circle cx="556" cy="274" r="10" fill="#2F6B3A"/><text x="556" y="278" text-anchor="middle" class="num">3</text>
+
+  <!-- API <-> banco -->
+  <path d="M570 470 L570 518" class="linha" marker-start="url(#seta)" marker-end="url(#seta)"/>
+  <circle cx="556" cy="494" r="10" fill="#2F6B3A"/><text x="556" y="498" text-anchor="middle" class="num">2</text>
+
+  <!-- API <-> IA -->
+  <path d="M748 330 C790 330 800 240 840 240" class="linhaIA" marker-end="url(#setaIA)"/>
+  <path d="M840 262 C808 262 800 352 750 352" class="linhaIA tracejada" marker-end="url(#setaIA)"/>
+  <circle cx="796" cy="300" r="10" fill="#5E4396"/><text x="796" y="304" text-anchor="middle" class="num">4</text>
+
+  <!-- API -> pipeline -->
+  <path d="M748 420 C800 420 800 446 856 446" class="linhaDados" marker-end="url(#setaDados)"/>
+  <circle cx="796" cy="432" r="10" fill="#1C6E6E"/><text x="796" y="436" text-anchor="middle" class="num">6</text>
+
+  <!-- ouro -> IA (treino) -->
+  <path d="M1157 424 L1157 308" class="linhaIA" marker-end="url(#setaIA)"/>
+  <text x="1164" y="372" class="rot" fill="#5E4396">treino</text>
+
+  <!-- ouro -> painel -->
+  <path d="M1190 468 L1190 530" class="linhaDados" marker-end="url(#setaDados)"/>
+  <circle cx="1210" cy="500" r="10" fill="#1C6E6E"/><text x="1210" y="504" text-anchor="middle" class="num">7</text>
+
+  <!-- open-meteo -> pipeline e IA -->
+  <path d="M175 600 L175 636 L834 636 L834 500 L840 500" class="linhaDados tracejada" marker-end="url(#setaDados)"/>
+  <text x="190" y="652" class="rot">clima histórico (para o pipeline) e previsão (para a IA)</text>
+
+  <!-- ============ AREA 4 ============ -->
+  <rect x="30" y="660" width="1220" height="176" class="area" stroke="#555555"/>
+  <text x="48" y="686" class="tituloArea" fill="#444">Área 4 · DevOps, segurança e qualidade (envolve tudo)</text>
+  <rect x="50" y="700" width="280" height="118" class="caixa"/>
+  <text x="66" y="724" class="nome">Git e GitHub Actions</text>
+  <text x="66" y="744" class="det">monorepo com uma pasta por área</text>
+  <text x="66" y="761" class="det">cada push: build, testes, imagem</text>
+  <text x="66" y="778" class="det">Docker, sobe e confere a saúde</text>
+  <rect x="350" y="700" width="280" height="118" class="caixa"/>
+  <text x="366" y="724" class="nome">Docker Compose</text>
+  <text x="366" y="744" class="det">PostgreSQL + API + serviço de IA</text>
+  <text x="366" y="761" class="det">um comando sobe a solução inteira</text>
+  <text x="366" y="778" class="det">/actuator/health no monitoramento</text>
+  <rect x="650" y="700" width="280" height="118" class="caixa"/>
+  <text x="666" y="724" class="nome">Segurança</text>
+  <text x="666" y="744" class="det">login com token JWT e senha BCrypt</text>
+  <text x="666" y="761" class="det">validação de entrada · chave por sensor</text>
+  <text x="666" y="778" class="det">produtor só vê o que é dele</text>
+  <text x="666" y="795" class="det">segredos em variável de ambiente</text>
+  <rect x="950" y="700" width="280" height="118" class="caixa"/>
+  <text x="966" y="724" class="nome">Testes</text>
+  <text x="966" y="744" class="det">plano com 14+ casos (JUnit, pytest)</text>
+  <text x="966" y="761" class="det">rodam no CI a cada push</text>
+  <text x="966" y="778" class="det">evidencia: relatório e prints</text>
+
+  <!-- legenda do fluxo -->
+  <text x="40" y="852" font-size="12.5" fill="#44504A">Fluxo: 1 sensor mede · 2 API guarda · 3 app pede a recomendação · 4 IA decide (tracejado: resposta; sem IA, regra básica) · 5 produtor rega e registra · 6 pipeline consolida · 7 painel mostra ao técnico</text>
+</svg>

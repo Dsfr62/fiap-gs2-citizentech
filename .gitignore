@@ -1,0 +1,27 @@
+# Java
+target/
+*.class
+
+# Node / Expo
+node_modules/
+.expo/
+dist/
+web-build/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# Dados gerados pelo pipeline (o script recria)
+area2-dados/dados/
+
+# Segredos e locais
+.env
+*.env.local
+.DS_Store
+*.log
+.idea/
+.vscode/
