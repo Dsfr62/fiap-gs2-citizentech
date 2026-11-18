@@ -16,7 +16,7 @@
     <groupId>br.com.fiap</groupId>
     <artifactId>gs2-api</artifactId>
     <version>0.1.0</version>
-    <name>GS2 CitizenTech API</name>
+    <name>Sereno API</name>
     <description>API do MVP de irrigacao para o agricultor familiar - Global Solution 2026/2 - 4ESOA FIAP</description>
 
     <properties>

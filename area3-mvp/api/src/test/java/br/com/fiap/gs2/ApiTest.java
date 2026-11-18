@@ -170,4 +170,24 @@ class ApiTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.status").value("UP"));
     }
+
+    @Test
+    @DisplayName("CT15 - exportacao de canteiros, alertas e regas: tecnico entra sem ver a chave do sensor; produtor nao (403)")
+    void exportacaoDeCanteirosAlertasERegas() throws Exception {
+        String tokenAna = token("ana@exemplo.com");
+        String canteirosJson = mvc.perform(get("/api/dados/canteiros").header("Authorization", "Bearer " + tokenAna))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.length()", greaterThan(2)))
+                .andReturn().getResponse().getContentAsString();
+        org.junit.jupiter.api.Assertions.assertFalse(canteirosJson.contains("demo-sensor"),
+                "a exportacao nao pode levar a chave do sensor");
+        mvc.perform(get("/api/dados/recomendacoes").header("Authorization", "Bearer " + tokenAna))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+        mvc.perform(get("/api/dados/regas").header("Authorization", "Bearer " + tokenAna))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$").isArray());
+        mvc.perform(get("/api/dados/regas").header("Authorization", "Bearer " + token("jorge@exemplo.com")))
+                .andExpect(status().isForbidden());
+    }
 }

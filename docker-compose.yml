@@ -1,0 +1,44 @@
+# Sereno: banco PostgreSQL + API (+ servico de IA quando a Area 1 existir).
+# Como rodar: area4-devops/README.md. Os segredos vem do arquivo .env (modelo em .env.exemplo).
+services:
+
+  banco:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: sereno
+      POSTGRES_USER: sereno
+      POSTGRES_PASSWORD: ${DB_SENHA:?defina DB_SENHA no arquivo .env (modelo em .env.exemplo)}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sereno -d sereno"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - dados-banco:/var/lib/postgresql/data
+    # Sem "ports": o banco so e visivel para a API, dentro da rede do compose.
+
+  api:
+    build: ./area3-mvp/api
+    depends_on:
+      banco:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://banco:5432/sereno
+      DB_USUARIO: sereno
+      DB_SENHA: ${DB_SENHA}
+      JWT_SEGREDO: ${JWT_SEGREDO:?defina JWT_SEGREDO no arquivo .env (modelo em .env.exemplo)}
+      # Enquanto o servico "ia" nao existe, a API cai na regra basica e diz isso na tela.
+      IA_URL: http://ia:8001
+      CORS_ORIGENS: http://localhost:8081,http://localhost:19006
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  # Area 1 (IA): entra na proxima etapa, com area1-ia/Dockerfile.
+  # ia:
+  #   build: ./area1-ia
+  #   ports:
+  #     - "8001:8001"
+
+volumes:
+  dados-banco:

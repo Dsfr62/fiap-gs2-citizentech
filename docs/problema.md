@@ -1,6 +1,6 @@
 # O problema
 
-> Global Solution 2026/2 · CitizenTech · tema "Campo · pequeno produtor". Este texto vai para o PDF da entrega.
+> Sereno · Global Solution 2026/2 (CitizenTech) · tema "Campo · pequeno produtor". Este texto vai para o PDF da entrega.
 
 ## Quem é o cidadão
 

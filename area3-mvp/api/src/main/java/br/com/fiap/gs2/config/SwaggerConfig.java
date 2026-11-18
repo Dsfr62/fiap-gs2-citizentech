@@ -14,7 +14,7 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openApi() {
         return new OpenAPI()
-                .info(new Info().title("GS2 CitizenTech API")
+                .info(new Info().title("Sereno API")
                         .description("Irrigacao na medida para o agricultor familiar: sensores, recomendacao e registro de rega.")
                         .version("0.1.0"))
                 .components(new Components().addSecuritySchemes("token",

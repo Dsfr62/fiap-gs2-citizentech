@@ -1,5 +1,5 @@
 /*
-  GS2 CitizenTech - no de sensores do canteiro (Arduino Uno, simulado no TinkerCad)
+  Sereno - no de sensores do canteiro (Arduino Uno, simulado no TinkerCad)
 
   Sensores:
     A0  sensor de umidade do solo (SIG). VCC no pino 7: so liga na hora de ler (o sensor dura mais).
