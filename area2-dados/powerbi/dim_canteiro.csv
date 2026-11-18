@@ -1,0 +1,8 @@
+﻿canteiro_chave,canteiro_id,origem,nome,cultura,produtor,comunidade,area_m2,vazao_l_min,umidade_minima
+sim-101,101,simulado,Canteiro 1 - Alface,FOLHOSA,Jorge Almeida,Água Limpa,120,30,45
+sim-102,102,simulado,Canteiro 2 - Tomate,FRUTO,Jorge Almeida,Água Limpa,80,20,38
+sim-103,103,simulado,Horta do Antônio - Alface,FOLHOSA,Antônio Ribeiro,Água Limpa,100,25,45
+sim-104,104,simulado,Horta da Maria - Couve,FOLHOSA,Maria Lima,Pinhal,60,15,45
+sim-105,105,simulado,Sítio da Cida - Couve,FOLHOSA,Cida Moraes,Pinhal,90,20,45
+sim-106,106,simulado,Sítio do Tadeu - Tomate,FRUTO,Tadeu Campos,Ponte Alta,150,30,38
+sim-107,107,simulado,Horta da Rosa - Cenoura,RAIZ,Rosa Nunes,Ponte Alta,70,15,32
