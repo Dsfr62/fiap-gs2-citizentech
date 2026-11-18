@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 700" width="1280" height="700" font-family="Helvetica, Arial, sans-serif">
+  <title>Camadas de dados do Sereno: bronze, prata e ouro</title>
+  <defs>
+    <marker id="seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1C6E6E"/>
+    </marker>
+    <marker id="setaIA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#5E4396"/>
+    </marker>
+    <style>
+      .caixa { fill: #FFFFFF; stroke: #9AA39A; stroke-width: 1.2; }
+      .titulo { font-size: 22px; font-weight: 700; fill: #1E2A1E; }
+      .sub { font-size: 13.5px; fill: #44504A; }
+      .nome { font-size: 15px; font-weight: 700; fill: #1E2A1E; }
+      .det { font-size: 12.5px; fill: #44504A; }
+      .cam { font-size: 17px; font-weight: 700; fill: #FFFFFF; }
+      .linha { stroke: #1C6E6E; stroke-width: 1.8; fill: none; }
+      .linhaIA { stroke: #5E4396; stroke-width: 1.8; fill: none; stroke-dasharray: 6 4; }
+      .rot { font-size: 12px; fill: #1C6E6E; font-weight: 700; }
+      .rotIA { font-size: 12px; fill: #5E4396; font-weight: 700; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="700" fill="#FAF8F3"/>
+  <text x="40" y="48" class="titulo">Sereno: o caminho do dado, da leitura do sensor ao painel</text>
+  <text x="40" y="72" class="sub">Área 2, Big Data. Cada etapa é um script em area2-dados/; python pipeline.py roda todas em ordem.</text>
+
+  <!-- fontes -->
+  <text x="40" y="112" class="nome">Fontes</text>
+  <rect x="40" y="124" width="220" height="92" rx="10" class="caixa"/>
+  <text x="54" y="148" class="nome">Sensor do canteiro</text>
+  <text x="54" y="168" class="det">TinkerCad ou simulador.py</text>
+  <text x="54" y="186" class="det">umidade do solo, temperatura</text>
+  <text x="54" y="204" class="det">e luz, a cada hora</text>
+
+  <rect x="40" y="232" width="220" height="92" rx="10" class="caixa"/>
+  <text x="54" y="256" class="nome">Produtor responde</text>
+  <text x="54" y="276" class="det">"1 fiz / 2 não fiz"</text>
+  <text x="54" y="294" class="det">hoje: o "Reguei" do app</text>
+  <text x="54" y="312" class="det">(a rega registrada)</text>
+
+  <rect x="40" y="340" width="220" height="92" rx="10" class="caixa"/>
+  <text x="54" y="364" class="nome">Open-Meteo</text>
+  <text x="54" y="384" class="det">clima real de Ibiúna, por hora:</text>
+  <text x="54" y="402" class="det">chuva, umidade do ar,</text>
+  <text x="54" y="420" class="det">temperatura e evapotranspiração</text>
+
+  <rect x="40" y="448" width="220" height="92" rx="10" class="caixa" stroke-dasharray="5 4"/>
+  <text x="54" y="472" class="nome">gerador.py</text>
+  <text x="54" y="492" class="det">60 dias SIMULADOS, 7 canteiros,</text>
+  <text x="54" y="510" class="det">3 comunidades, semente 2026,</text>
+  <text x="54" y="528" class="det">no mesmo formato da API</text>
+
+  <!-- API -->
+  <rect x="300" y="178" width="150" height="92" rx="10" class="caixa"/>
+  <text x="314" y="202" class="nome">API do Sereno</text>
+  <text x="314" y="222" class="det">Área 3</text>
+  <text x="314" y="240" class="det">/api/dados/...</text>
+  <text x="314" y="258" class="det">só a técnica Ana</text>
+  <path d="M260,170 L300,205" class="linha" marker-end="url(#seta)"/>
+  <path d="M260,278 L300,245" class="linha" marker-end="url(#seta)"/>
+
+  <!-- bronze -->
+  <rect x="490" y="112" width="220" height="440" rx="14" fill="#F2E3A6" stroke="#B89A3E" stroke-width="2"/>
+  <rect x="490" y="112" width="220" height="40" rx="14" fill="#B89A3E"/>
+  <text x="508" y="139" class="cam">Bronze: o cru</text>
+  <text x="508" y="180" class="nome">dados/bronze/</text>
+  <text x="508" y="204" class="det">JSON como veio, sem mexer</text>
+  <text x="508" y="236" class="nome">api/&lt;carimbo&gt;/</text>
+  <text x="508" y="256" class="det">canteiros, leituras,</text>
+  <text x="508" y="274" class="det">recomendacoes (alertas), regas</text>
+  <text x="508" y="306" class="nome">clima/</text>
+  <text x="508" y="326" class="det">histórico (60 dias) e recente</text>
+  <text x="508" y="358" class="nome">simulado/</text>
+  <text x="508" y="378" class="det">o histórico de 60 dias,</text>
+  <text x="508" y="396" class="det">com _LEIA.txt dizendo que</text>
+  <text x="508" y="414" class="det">é simulado</text>
+  <text x="508" y="458" class="det">ingestao.py e gerador.py</text>
+  <text x="508" y="476" class="det">Sem internet: o clima sai da</text>
+  <text x="508" y="494" class="det">cópia em amostra/</text>
+
+  <path d="M450,224 L490,224" class="linha" marker-end="url(#seta)"/>
+  <path d="M260,386 L490,386" class="linha" marker-end="url(#seta)"/>
+  <path d="M260,494 L490,494" class="linha" marker-end="url(#seta)"/>
+
+  <!-- prata -->
+  <rect x="750" y="112" width="220" height="440" rx="14" fill="#E3ECEA" stroke="#7E9C97" stroke-width="2"/>
+  <rect x="750" y="112" width="220" height="40" rx="14" fill="#7E9C97"/>
+  <text x="768" y="139" class="cam">Prata: o tratado</text>
+  <text x="768" y="180" class="nome">dados/prata/</text>
+  <text x="768" y="204" class="det">prata.py</text>
+  <text x="768" y="236" class="nome">Limpeza</text>
+  <text x="768" y="256" class="det">fora da faixa: sai (39)</text>
+  <text x="768" y="274" class="det">repetida (reenvio): sai (196)</text>
+  <text x="768" y="292" class="det">UTC e -03:00: hora local</text>
+  <text x="768" y="324" class="nome">Junta</text>
+  <text x="768" y="344" class="det">o clima da mesma hora</text>
+  <text x="768" y="362" class="det">em cada leitura</text>
+  <text x="768" y="394" class="nome">Resposta do alerta</text>
+  <text x="768" y="414" class="det">fiz, não fiz ou aguardando,</text>
+  <text x="768" y="432" class="det">pela rega nas 24 h seguintes</text>
+  <text x="768" y="464" class="nome">qualidade.csv</text>
+  <text x="768" y="484" class="det">conta o que cada etapa tirou</text>
+
+  <path d="M710,332 L750,332" class="linha" marker-end="url(#seta)"/>
+
+  <!-- ouro -->
+  <rect x="1010" y="112" width="230" height="440" rx="14" fill="#DDE8DA" stroke="#2F6B3A" stroke-width="2"/>
+  <rect x="1010" y="112" width="230" height="40" rx="14" fill="#2F6B3A"/>
+  <text x="1028" y="139" class="cam">Ouro: o analítico</text>
+  <text x="1028" y="180" class="nome">dados/ouro/ e powerbi/</text>
+  <text x="1028" y="204" class="det">ouro.py, modelo estrela</text>
+  <text x="1028" y="236" class="nome">fato_diario_canteiro</text>
+  <text x="1028" y="256" class="det">umidade média e mínima, horas</text>
+  <text x="1028" y="274" class="det">abaixo do mínimo, água usada</text>
+  <text x="1028" y="292" class="det">e economizada, chuva, alertas,</text>
+  <text x="1028" y="310" class="det">respostas e risco do clima</text>
+  <text x="1028" y="342" class="nome">dim_canteiro</text>
+  <text x="1028" y="362" class="det">cultura, produtor, comunidade</text>
+  <text x="1028" y="394" class="nome">alertas</text>
+  <text x="1028" y="414" class="nome">leituras_por_hora</text>
+  <text x="1028" y="434" class="nome">resumo_comunidade</text>
+  <text x="1028" y="474" class="det">CSV com vírgula, ponto decimal</text>
+  <text x="1028" y="492" class="det">e UTF-8, pronto para o Power BI</text>
+
+  <path d="M970,332 L1010,332" class="linha" marker-end="url(#seta)"/>
+
+  <!-- painel -->
+  <rect x="750" y="590" width="490" height="84" rx="12" fill="#1C6E6E"/>
+  <text x="768" y="618" class="cam">Painel do técnico (Power BI)</text>
+  <text x="768" y="642" class="det" fill="#FFFFFF" style="fill:#FFFFFF">taxa de "fiz", água economizada, alertas enviados, risco por comunidade;</text>
+  <text x="768" y="660" class="det" style="fill:#FFFFFF">filtros: comunidade, cultura, produtor e período</text>
+  <path d="M1125,552 L1125,590" class="linha" marker-end="url(#seta)"/>
+
+  <!-- IA -->
+  <rect x="300" y="590" width="400" height="84" rx="12" fill="#FFFFFF" stroke="#5E4396" stroke-width="1.8"/>
+  <text x="318" y="618" class="nome" style="fill:#5E4396">Área 1: IA</text>
+  <text x="318" y="642" class="det">treina o modelo de risco com a prata (leitura + clima)</text>
+  <text x="318" y="660" class="det">e mede o acerto pelas respostas "fiz / não fiz"</text>
+  <path d="M860,552 L700,620" class="linhaIA" marker-end="url(#setaIA)"/>
+  <text x="742" y="572" class="rotIA">prata</text>
+</svg>

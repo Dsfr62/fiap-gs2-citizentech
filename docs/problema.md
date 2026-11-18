@@ -2,6 +2,18 @@
 
 > Sereno · Global Solution 2026/2 (CitizenTech) · tema "Campo · pequeno produtor". Este texto vai para o PDF da entrega.
 
+## O Sereno, em uma frase
+
+O clima da roça em aviso simples: sensores no canteiro (e, no futuro, uma estação comunitária dividida entre vizinhos), o clima e uma IA viram avisos curtos para o produtor ("não precisa irrigar até quinta", "risco alto de ferrugem: olhe as folhas de baixo", "geada nesta madrugada: cubra as mudas"). Ele responde "1 fiz / 2 não fiz", e a Emater ou a cooperativa acompanha num painel por comunidade. Nome e recorte escolhidos pelo grupo em 18/11/2026.
+
+| Parte | Estado hoje |
+|---|---|
+| Aviso de irrigação (regar ou não, quantos minutos e o porquê) | **pronto** na API e no app (regra básica; a IA entra pela Área 1) |
+| Resposta "fiz / não fiz" | hoje é o "Reguei" do app; o pipeline transforma em fiz, não fiz ou aguardando |
+| Painel por comunidade (taxa de "fiz", água economizada, alertas, risco) | dados prontos na Área 2; o painel em Power BI está em montagem |
+| Risco de doença, geada e calor | indicadores do clima na Área 2; o modelo de risco é da Área 1 |
+| Aviso por WhatsApp, SMS e áudio | parte da visão; no MVP, o aviso aparece no app |
+
 ## Quem é o cidadão
 
 O agricultor familiar de hortaliças (alface, couve, tomate) tem de 1 a 5 hectares, irriga por aspersão ou gotejamento com bomba elétrica e não tem técnico por perto.

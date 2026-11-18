@@ -90,6 +90,7 @@ def fato_diario(hora: pd.DataFrame, clima_dia: pd.DataFrame, alertas: pd.DataFra
     contagens = ["alertas_enviados", "alertas_para_regar", "respostas_fiz", "respostas_nao_fiz",
                  "respostas_aguardando", "regas", "minutos_regados", "litros_usados"]
     fato[contagens] = fato[contagens].fillna(0)
+    fato[[c for c in contagens if c != "litros_usados"]] = fato[[c for c in contagens if c != "litros_usados"]].astype(int)
     # "antes": o costume de regar 30 minutos todo dia; "depois": o que o produtor regou com o Sereno
     fato["litros_calendario"] = MINUTOS_CALENDARIO * fato["vazao_l_min"]
     fato["litros_economizados"] = fato["litros_calendario"] - fato["litros_usados"]
@@ -102,13 +103,13 @@ def resumo_comunidade(fato: pd.DataFrame, canteiros: pd.DataFrame) -> pd.DataFra
         canteiros=("canteiro_chave", "nunique"), dias=("data", "nunique"),
         alertas_enviados=("alertas_enviados", "sum"), respostas_fiz=("respostas_fiz", "sum"),
         respostas_nao_fiz=("respostas_nao_fiz", "sum"), litros_usados=("litros_usados", "sum"),
-        litros_calendario=("litros_calendario", "sum"), horas_abaixo_do_minimo=("horas_abaixo_do_minimo", "sum"),
-        dias_risco_doenca_alto=("risco_doenca", lambda r: (r == "alto").sum()))
+        litros_calendario=("litros_calendario", "sum"), horas_abaixo_do_minimo=("horas_abaixo_do_minimo", "sum"))
+    # dias distintos com risco alto de doenca na comunidade (nao dia x canteiro)
+    risco = f[f["risco_doenca"] == "alto"].groupby("comunidade")["data"].nunique()
+    resumo["dias_risco_doenca_alto"] = resumo["comunidade"].map(risco).fillna(0).astype(int)
     respondidas = resumo["respostas_fiz"] + resumo["respostas_nao_fiz"]
     resumo["taxa_de_fiz_pct"] = (100 * resumo["respostas_fiz"] / respondidas).round(1)
     resumo["agua_economizada_pct"] = (100 * (1 - resumo["litros_usados"] / resumo["litros_calendario"])).round(1)
-    # dias_risco_doenca_alto conta dia x canteiro; por comunidade, vale o numero de dias distintos
-    resumo["dias_risco_doenca_alto"] = (resumo["dias_risco_doenca_alto"] / resumo["canteiros"]).round().astype(int)
     return resumo
 
 

@@ -34,8 +34,16 @@ def _baixar(url: str, corpo: dict | None = None, token: str | None = None, timeo
     if token:
         cabecalhos["Authorization"] = f"Bearer {token}"
     pedido = urllib.request.Request(url, data=dados, headers=cabecalhos)
-    with urllib.request.urlopen(pedido, timeout=timeout) as resposta:
-        return resposta.read().decode("utf-8")
+    for tentativa in (1, 2):   # a rede do campo cai: tenta de novo uma vez antes de desistir
+        try:
+            with urllib.request.urlopen(pedido, timeout=timeout) as resposta:
+                return resposta.read().decode("utf-8")
+        except urllib.error.HTTPError:
+            raise   # resposta de erro da API (401, 403...): tentar de novo nao adianta
+        except (urllib.error.URLError, TimeoutError, OSError):
+            if tentativa == 2:
+                raise
+    raise RuntimeError("inalcancavel")
 
 
 def _url_clima(base: str, **extra) -> str:
