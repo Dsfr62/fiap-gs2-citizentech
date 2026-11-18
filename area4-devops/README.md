@@ -70,7 +70,9 @@ curl http://localhost:8080/actuator/health    # {"status":"UP"}
 
 ## Evidência da execução
 
-- Execução verde na `main`: _a preencher com o link_
+- Execução verde na `main` (18/11/2026, os 4 jobs e os 27 casos): https://github.com/Dsfr62/fiap-gs2-citizentech/actions/runs/44239186747
+- Todas as execuções: https://github.com/Dsfr62/fiap-gs2-citizentech/actions/workflows/ci.yml
+- O que ela mostrou: 15 de 15 casos da API; imagem montada; API saudável em 14 s sobre o PostgreSQL; login da técnica, 3 canteiros exportados e 401 sem token; 5 testes do pipeline; pipeline pelo README; e o fluxo ponta a ponta (3 leituras secas, alerta de 22 min pela regra básica, rega, e o alerta chegando à prata como "fiz").
 - Prints para o PDF: o **Summary** da execução (tabela dos 15 casos da API, Docker, pipeline e fluxo) e a lista dos quatro jobs verdes.
 
 ## Ferramentas de IA usadas nesta área

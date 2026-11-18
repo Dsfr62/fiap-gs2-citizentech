@@ -26,7 +26,7 @@
   </defs>
 
   <rect width="1280" height="860" fill="#FAF8F3"/>
-  <text x="40" y="44" font-size="22" font-weight="700" fill="#1E2A1E">Arquitetura geral · irrigação na medida para o agricultor familiar</text>
+  <text x="40" y="44" font-size="22" font-weight="700" fill="#1E2A1E">Sereno: arquitetura geral, com as 4 áreas</text>
   <text x="40" y="68" font-size="14" fill="#44504A">As 4 áreas resolvem o mesmo problema: quando e quanto regar a horta. Roxo: a IA usa os dados do pipeline. Verde-azulado: o sensor chega ao painel.</text>
 
   <!-- ============ CAMPO ============ -->
@@ -35,13 +35,13 @@
 
   <rect x="50" y="138" width="250" height="88" class="caixa"/>
   <text x="66" y="162" class="nome">Produtor (Seu Jorge)</text>
-  <text x="66" y="182" class="det">2 há de folhosas, celular Android,</text>
+  <text x="66" y="182" class="det">2 ha de folhosas, celular Android,</text>
   <text x="66" y="198" class="det">sinal fraco. Usa o app da Área 3.</text>
   <text x="66" y="214" class="det">Rega e registra: "reguei".</text>
 
   <rect x="50" y="252" width="250" height="150" class="caixa"/>
   <text x="66" y="276" class="nome">Nó de sensores (Arduino)</text>
-  <text x="66" y="296" class="det">TinkerCad · Área 3 (IoT)</text>
+  <text x="66" y="296" class="det">TinkerCad, Área 3 (IoT)</text>
   <text x="66" y="316" class="det">A0 umidade do solo</text>
   <text x="66" y="333" class="det">A1 TMP36 temperatura do ar</text>
   <text x="66" y="350" class="det">A2 fotoresistor (luz do sol)</text>
@@ -60,13 +60,13 @@
 
   <!-- ============ AREA 3 ============ -->
   <rect x="370" y="96" width="400" height="520" class="area" stroke="#2F6B3A"/>
-  <text x="388" y="122" class="tituloArea" fill="#2F6B3A">Área 3 · MVP, IoT e experiência digital</text>
+  <text x="388" y="122" class="tituloArea" fill="#2F6B3A">Área 3: MVP, IoT e experiência digital</text>
 
   <rect x="392" y="138" width="356" height="110" class="caixa"/>
   <text x="408" y="162" class="nome">App (Expo: web e celular)</text>
-  <text x="408" y="182" class="det">Telas: Entrar · Meus canteiros · Hoje</text>
+  <text x="408" y="182" class="det">Telas: Entrar, Meus canteiros, Hoje,</text>
   <text x="408" y="199" class="det">(sensor ao vivo + recomendação + "reguei")</text>
-  <text x="408" y="216" class="det">· Histórico (umidade e água gasta) · Novo canteiro</text>
+  <text x="408" y="216" class="det">Histórico (umidade e água gasta) e Novo canteiro</text>
   <text x="408" y="236" class="det">Atualiza sozinho a cada 5 s</text>
 
   <rect x="392" y="300" width="356" height="170" class="caixa"/>
@@ -76,17 +76,17 @@
   <text x="408" y="378" class="det">/api/canteiros/{id}/recomendacoes e /regas</text>
   <text x="408" y="395" class="det">/api/dados/leituras (so tecnico, para o pipeline)</text>
   <text x="408" y="412" class="det">Regra básica: plano B se a IA não responder</text>
-  <text x="408" y="429" class="det">/actuator/health · Swagger</text>
+  <text x="408" y="429" class="det">/actuator/health e Swagger</text>
   <text x="408" y="454" class="det">Validação de entrada em todo pedido</text>
 
   <rect x="392" y="520" width="356" height="74" class="caixa"/>
   <text x="408" y="544" class="nome">Banco de dados</text>
-  <text x="408" y="564" class="det">H2 (local, sem instalar) · PostgreSQL (Docker)</text>
-  <text x="408" y="581" class="det">usuarios · canteiros · leituras · recomendacoes · regas</text>
+  <text x="408" y="564" class="det">H2 (local, sem instalar) ou PostgreSQL (Docker)</text>
+  <text x="408" y="581" class="det">usuarios, canteiros, leituras, recomendacoes, regas</text>
 
   <!-- ============ AREA 1 ============ -->
   <rect x="820" y="96" width="430" height="226" class="area" stroke="#5E4396"/>
-  <text x="838" y="122" class="tituloArea" fill="#5E4396">Área 1 · IA e automação</text>
+  <text x="838" y="122" class="tituloArea" fill="#5E4396">Área 1: IA e automação</text>
   <rect x="842" y="136" width="386" height="170" class="caixa"/>
   <text x="858" y="160" class="nome">Serviço de IA (Python)</text>
   <text x="858" y="180" class="det">POST /recomendar: regar hoje? quantos minutos?</text>
@@ -99,7 +99,7 @@
 
   <!-- ============ AREA 2 ============ -->
   <rect x="820" y="346" width="430" height="270" class="area" stroke="#1C6E6E"/>
-  <text x="838" y="372" class="tituloArea" fill="#1C6E6E">Área 2 · Big Data e visualização</text>
+  <text x="838" y="372" class="tituloArea" fill="#1C6E6E">Área 2: Big Data e visualização</text>
   <rect x="842" y="386" width="386" height="132" class="caixa"/>
   <text x="858" y="410" class="nome">Pipeline em camadas (Python)</text>
   <rect x="858" y="424" width="100" height="44" rx="8" fill="#E8DCC8"/>
@@ -110,8 +110,8 @@
   <text x="1157" y="451" text-anchor="middle" class="rot">ouro (por dia)</text>
   <path d="M958 446 L978 446" class="linhaDados" marker-end="url(#setaDados)"/>
   <path d="M1080 446 L1100 446" class="linhaDados" marker-end="url(#setaDados)"/>
-  <text x="858" y="492" class="det">leituras da API + clima · remove erro e duplicado</text>
-  <text x="858" y="508" class="det">água usada x recomendada · dias de estresse</text>
+  <text x="858" y="492" class="det">leituras da API + clima; remove erro e duplicado</text>
+  <text x="858" y="508" class="det">água usada x recomendada; horas de estresse</text>
 
   <rect x="842" y="532" width="386" height="68" class="caixa"/>
   <text x="858" y="556" class="nome">Painel Power BI (técnico da cooperativa)</text>
@@ -161,7 +161,7 @@
 
   <!-- ============ AREA 4 ============ -->
   <rect x="30" y="660" width="1220" height="176" class="area" stroke="#555555"/>
-  <text x="48" y="686" class="tituloArea" fill="#444">Área 4 · DevOps, segurança e qualidade (envolve tudo)</text>
+  <text x="48" y="686" class="tituloArea" fill="#444">Área 4: DevOps, segurança e qualidade (envolve tudo)</text>
   <rect x="50" y="700" width="280" height="118" class="caixa"/>
   <text x="66" y="724" class="nome">Git e GitHub Actions</text>
   <text x="66" y="744" class="det">monorepo com uma pasta por área</text>
@@ -175,7 +175,7 @@
   <rect x="650" y="700" width="280" height="118" class="caixa"/>
   <text x="666" y="724" class="nome">Segurança</text>
   <text x="666" y="744" class="det">login com token JWT e senha BCrypt</text>
-  <text x="666" y="761" class="det">validação de entrada · chave por sensor</text>
+  <text x="666" y="761" class="det">validação de entrada, chave por sensor</text>
   <text x="666" y="778" class="det">produtor só vê o que é dele</text>
   <text x="666" y="795" class="det">segredos em variável de ambiente</text>
   <rect x="950" y="700" width="280" height="118" class="caixa"/>
@@ -185,5 +185,5 @@
   <text x="966" y="778" class="det">evidencia: relatório e prints</text>
 
   <!-- legenda do fluxo -->
-  <text x="40" y="852" font-size="12.5" fill="#44504A">Fluxo: 1 sensor mede · 2 API guarda · 3 app pede a recomendação · 4 IA decide (tracejado: resposta; sem IA, regra básica) · 5 produtor rega e registra · 6 pipeline consolida · 7 painel mostra ao técnico</text>
+  <text x="40" y="852" font-size="12.5" fill="#44504A">Fluxo: 1 sensor mede, 2 API guarda, 3 app pede a recomendação, 4 IA decide (tracejado: resposta; sem IA, regra básica), 5 produtor rega e registra, 6 pipeline consolida, 7 painel mostra ao técnico</text>
 </svg>
