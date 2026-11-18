@@ -7,7 +7,7 @@ O que esta área entrega, e onde está cada item da nota:
 | Código organizado por módulos e versionado em Git | o repositório, uma pasta por área (README da raiz) |
 | Docker e CI funcionando | `area3-mvp/api/Dockerfile`, `docker-compose.yml` e `.github/workflows/ci.yml` |
 | 2+ práticas de segurança | a tabela "Segurança", abaixo, com arquivo e linha |
-| Plano com 5+ casos de teste e a execução | [`docs/plano-de-testes.md`](../docs/plano-de-testes.md) (27 casos) e "Evidência da execução", abaixo |
+| Plano com 5+ casos de teste e a execução | [`docs/plano-de-testes.md`](../docs/plano-de-testes.md) (37 casos) e "Evidência da execução", abaixo |
 
 ## O CI (GitHub Actions)
 
@@ -17,8 +17,8 @@ A cada push na `main` ou pull request, o arquivo `.github/workflows/ci.yml` roda
 |---|---|---|
 | API Java | compila com o Maven Wrapper, roda o JUnit e escreve a tabela dos casos no resumo | CT01 a CT15 |
 | App Expo | instala com `npm ci` e confere os tipos com o TypeScript | CT16 |
-| Python | confere a sintaxe dos scripts, roda os testes do pipeline e o pipeline inteiro como o README manda | CT17, CT20 a CT25 |
-| Docker | só roda se a API passou: monta a imagem, sobe o compose, espera o `/actuator/health`, faz a fumaça no PostgreSQL e o fluxo ponta a ponta | CT18, CT19, CT26, CT27 |
+| Python | confere a sintaxe dos scripts; roda os testes e o pipeline da Área 2; treina a IA, roda os testes dela, o antes e depois e os exemplos | CT17, CT20 a CT25, CT28 a CT35, CT37 |
+| Docker | só roda se a API passou: monta as imagens da API e da IA, sobe o compose, espera a saúde das duas, faz a fumaça no PostgreSQL e o fluxo ponta a ponta com a IA | CT18, CT19, CT26, CT27, CT36 |
 
 **Como ver:** no GitHub, aba **Actions**, workflow **CI**, a execução mais recente. Cada job mostra os passos; o **Summary** da execução traz as tabelas (casos da API, Docker, pipeline e fluxo). Os relatórios do JUnit ficam em **Artifacts** (`relatorios-testes-api`).
 
@@ -30,12 +30,12 @@ Precisa do Docker Desktop (ou do Docker Engine com o plugin `compose`).
 
 ```bash
 cp .env.exemplo .env          # e troque os dois valores dentro do .env
-docker compose up -d --build  # sobe o PostgreSQL e a API
+docker compose up -d --build  # sobe o PostgreSQL, a IA e a API
 curl http://localhost:8080/actuator/health    # {"status":"UP"}
 ```
 
 - A primeira vez demora alguns minutos (baixa as imagens e as dependências do Maven).
-- A API fica em http://localhost:8080 (Swagger em `/swagger-ui.html`), já com os usuários de demonstração do README da Área 3.
+- A API fica em http://localhost:8080 (Swagger em `/swagger-ui.html`), já com os usuários de demonstração do README da Área 3. A IA fica em http://localhost:8001 (`/saude`).
 - O app e o simulador rodam fora do Docker, como no README da Área 3, apontando para a mesma porta 8080.
 - Para o fluxo ponta a ponta (sensor, alerta, "fiz" e pipeline): `pip install -r area2-dados/requirements.txt` e depois `./area4-devops/fluxo_ponta_a_ponta.sh`.
 - Para parar: `docker compose down` (com `-v`, apaga também o banco).
@@ -43,7 +43,8 @@ curl http://localhost:8080/actuator/health    # {"status":"UP"}
 ### O que tem em cada arquivo
 
 - **`area3-mvp/api/Dockerfile`**, em duas etapas. A primeira usa o JDK 17 e o `mvnw` para gerar o `.jar`; a segunda parte de uma imagem só com o JRE 17 e copia apenas o `.jar`. A imagem final não leva código-fonte nem Maven, e a API roda com um usuário sem poder de administrador.
-- **`docker-compose.yml`**: o `banco` (PostgreSQL 16) com teste de saúde (`pg_isready`); a `api`, que só sobe depois do banco saudável; e o lugar do serviço de IA (Área 1), comentado até ele existir. Sem a IA, a API usa a regra básica e diz isso na tela.
+- **`area1-ia/Dockerfile`**: Python 3.12 enxuto; instala o pandas e o scikit-learn, roda o pipeline da Área 2 e treina o modelo na montagem da imagem (semente fixa), e o serviço roda como usuário comum.
+- **`docker-compose.yml`**: o `banco` (PostgreSQL 16) com teste de saúde (`pg_isready`); a `ia`, com teste de saúde em `/saude`; e a `api`, que só sobe depois do banco saudável e chama a IA em `http://ia:8001`. Se a IA cair, a API usa a regra básica e diz isso na tela.
 - **`.env.exemplo`**: o modelo dos segredos. O `.env` de verdade fica fora do Git.
 
 ## Segurança

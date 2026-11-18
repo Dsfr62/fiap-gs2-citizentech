@@ -12,6 +12,8 @@ import os
 import time
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import TimeoutError as PrazoEsgotado
 from datetime import datetime
 
 import pandas as pd
@@ -23,6 +25,8 @@ URL = "https://api.open-meteo.com/v1/forecast"
 VARIAVEIS = "temperature_2m,relative_humidity_2m,precipitation,et0_fao_evapotranspiration"
 _CACHE: dict = {}
 VALIDADE_DO_CACHE_S = 30 * 60
+PRAZO_DA_PREVISAO_S = 2.0      # a API espera a IA por 5 s: a previsao tem 2 s, contando DNS e conexao
+_BUSCA = ThreadPoolExecutor(max_workers=2)
 
 
 def _hora_a_hora(dados: dict) -> pd.DataFrame:
@@ -58,25 +62,35 @@ def resumir(hora_a_hora: pd.DataFrame, agora: datetime) -> dict | None:
     }
 
 
-def do_open_meteo(latitude: float, longitude: float, timeout: float = 2.5) -> dict | None:
-    """A API espera a IA por 5 s: a previsao tem 2,5 s para chegar, ou a IA decide so pelo sensor."""
+def _baixar(latitude: float, longitude: float, timeout: float) -> dict:
+    parametros = {"latitude": latitude, "longitude": longitude, "hourly": VARIAVEIS,
+                  "timezone": "America/Sao_Paulo", "forecast_days": 4}
+    pedido = urllib.request.Request(f"{URL}?{urllib.parse.urlencode(parametros)}",
+                                    headers={"User-Agent": "sereno-ia-fiap"})
+    with urllib.request.urlopen(pedido, timeout=timeout) as resposta:
+        dados = json.loads(resposta.read().decode("utf-8"))["hourly"]
+    _CACHE[(round(latitude, 2), round(longitude, 2))] = (time.time(), dados)
+    return dados
+
+
+def do_open_meteo(latitude: float, longitude: float, timeout: float = PRAZO_DA_PREVISAO_S) -> dict | None:
+    """Previsao das proximas horas. Se nao chegar no prazo (rede lenta, DNS travado), devolve None:
+    a IA decide so pelo sensor e responde a tempo. A busca continua por tras e enche o cache para o proximo pedido."""
     if os.environ.get("SERENO_SEM_PREVISAO") == "1":
         return None
-    chave = (round(latitude, 2), round(longitude, 2))
-    guardado = _CACHE.get(chave)
+    guardado = _CACHE.get((round(latitude, 2), round(longitude, 2)))
     if guardado and time.time() - guardado[0] < VALIDADE_DO_CACHE_S:
         dados = guardado[1]
     else:
-        parametros = {"latitude": latitude, "longitude": longitude, "hourly": VARIAVEIS,
-                      "timezone": "America/Sao_Paulo", "forecast_days": 4}
-        pedido = urllib.request.Request(f"{URL}?{urllib.parse.urlencode(parametros)}",
-                                        headers={"User-Agent": "sereno-ia-fiap"})
+        busca = _BUSCA.submit(_baixar, latitude, longitude, 10.0)
         try:
-            with urllib.request.urlopen(pedido, timeout=timeout) as resposta:
-                dados = json.loads(resposta.read().decode("utf-8"))["hourly"]
-        except (OSError, ValueError, KeyError):
+            dados = busca.result(timeout=timeout)
+        except PrazoEsgotado:
+            print(f"previsao: sem resposta do Open-Meteo em {timeout} s; decidindo so pelo sensor", flush=True)
             return None
-        _CACHE[chave] = (time.time(), dados)
+        except (OSError, ValueError, KeyError) as erro:
+            print(f"previsao: Open-Meteo falhou ({type(erro).__name__}); decidindo so pelo sensor", flush=True)
+            return None
     agora = pd.Timestamp.now(tz="America/Sao_Paulo").tz_localize(None)
     resumo = resumir(_hora_a_hora(dados), agora)
     if resumo:

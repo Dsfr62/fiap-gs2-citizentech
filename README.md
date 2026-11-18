@@ -13,7 +13,7 @@ O agricultor familiar decide quando irrigar e como se proteger do clima no olho:
 
 | Pasta | Área | O que tem | Estado |
 |---|---|---|---|
-| [`area1-ia/`](area1-ia/) | 1: IA e automação | serviço de IA (Python): modelo de risco, recomendação e mensagem em linguagem simples | em construção |
+| [`area1-ia/`](area1-ia/) | 1: IA e automação | modelo de irrigação (scikit-learn), riscos de doença, geada e calor, mensagem em linguagem simples e o antes e depois | **roda pelo README e no CI** |
 | [`area2-dados/`](area2-dados/) | 2: Big Data e visualização | pipeline bronze, prata e ouro com o clima real; CSVs e medidas DAX para o Power BI | **roda pelo README**; painel em montagem |
 | [`area3-mvp/`](area3-mvp/) | 3: MVP, IoT e experiência digital | API Spring Boot, app Expo (5 telas), Arduino no TinkerCad e simulador | **roda pelo README** |
 | [`area4-devops/`](area4-devops/) | 4: DevOps, segurança e qualidade | Docker, docker-compose, GitHub Actions, segurança e o fluxo ponta a ponta | **roda pelo README e no CI** |
@@ -26,7 +26,7 @@ Cada área tem o próprio README, com o passo a passo para rodar.
 - **Área 3 (app, API e sensores):** [`area3-mvp/README.md`](area3-mvp/README.md). Em resumo: `./mvnw spring-boot:run` na API, `python3 simulador.py` nos sensores e `npx expo start --web` no app.
 - **Área 2 (dados):** [`area2-dados/README.md`](area2-dados/README.md). Em resumo: `pip install -r requirements.txt` e `python pipeline.py`.
 - **Área 4 (Docker e CI):** [`area4-devops/README.md`](area4-devops/README.md). Em resumo: `cp .env.exemplo .env` e `docker compose up -d --build`. O CI roda a cada push (aba Actions do GitHub).
-- **Área 1 (IA):** em construção.
+- **Área 1 (IA):** [`area1-ia/README.md`](area1-ia/README.md). Em resumo: `pip install -r requirements.txt`, `python treinar.py`, `python avaliar.py` e `python servico.py`.
 
 ## Vídeo pitch
 
@@ -40,9 +40,10 @@ A regra da GS2 permite usar IA para pesquisar, revisar e explicar, desde que o g
 |---|---|---|---|
 | Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | propor a arquitetura; escrever a primeira versão da API, do app, do sketch do Arduino, do simulador e dos testes; explicar cada parte; procurar fontes dos dados do problema | áreas 3 e `docs/` | _a preencher após a revisão_ |
 | Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | escrever a primeira versão do Dockerfile, do docker-compose, do CI, do plano de testes, do pipeline de dados (bronze, prata e ouro), dos testes do pipeline e das medidas DAX; calibrar o indicador de risco de doença no clima real; explicar cada parte | áreas 2 e 4 e `docs/` | _a preencher após a revisão_ |
+| Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | escrever a primeira versão do treino, da decisão, dos riscos, da mensagem, do serviço, da avaliação de antes e depois, dos testes e do prompt; comparar modelos; explicar cada parte | área 1 | _a preencher após a revisão_ |
 
 Como foi feito:
-- Os testes automáticos (27 casos, rodando no GitHub Actions a cada push) e a execução pelo README conferem o que o código gerado faz.
+- Os testes automáticos (37 casos, rodando no GitHub Actions a cada push) e a execução pelo README conferem o que o código gerado faz.
 - Os números do problema têm fonte pública citada em `docs/problema.md`; nenhum dado de mercado foi inventado.
 - As respostas de usuários e os dados dos sensores são de demonstração, e o texto diz isso onde aparecem. O histórico de 60 dias da Área 2 é simulado sobre o clima real de Ibiúna (Open-Meteo), e o README da área explica o que é real e o que é simulado.
 

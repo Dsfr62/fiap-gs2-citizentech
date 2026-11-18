@@ -90,12 +90,12 @@
   <rect x="842" y="136" width="386" height="170" class="caixa"/>
   <text x="858" y="160" class="nome">Serviço de IA (Python)</text>
   <text x="858" y="180" class="det">POST /recomendar: regar hoje? quantos minutos?</text>
-  <text x="858" y="198" class="det">1. Modelo (árvore de decisão) treinado nos dados</text>
+  <text x="858" y="198" class="det">1. Modelo (floresta aleatória) treinado nos dados</text>
   <text x="858" y="214" class="det">   tratados do pipeline</text>
-  <text x="858" y="232" class="det">2. Previsão de chuva (sem sinal: decide só pelo sensor)</text>
+  <text x="858" y="232" class="det">2. Previsão do tempo; riscos de doença, geada e calor</text>
   <text x="858" y="250" class="det">3. Explicação em linguagem simples (prompt</text>
-  <text x="858" y="266" class="det">   documentado; modo simulado sem chave de API)</text>
-  <text x="858" y="290" class="det">Medida: acerto x balanço hídrico e água antes x depois</text>
+  <text x="858" y="266" class="det">   documentado; texto por regra, sem chave de API)</text>
+  <text x="858" y="290" class="det">Medida: água e acerto, antes x depois (61% menos água)</text>
 
   <!-- ============ AREA 2 ============ -->
   <rect x="820" y="346" width="430" height="270" class="area" stroke="#1C6E6E"/>

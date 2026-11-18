@@ -8,11 +8,11 @@ O clima da roça em aviso simples: sensores no canteiro (e, no futuro, uma esta�
 
 | Parte | Estado hoje |
 |---|---|
-| Aviso de irrigação (regar ou não, quantos minutos e o porquê) | **pronto** na API e no app (regra básica; a IA entra pela Área 1) |
+| Aviso de irrigação (regar ou não, quantos minutos e o porquê) | **pronto**: a IA da Área 1 decide com o sensor e a previsão; sem ela, a API usa a regra básica |
 | Resposta "fiz / não fiz" | hoje é o "Reguei" do app; o pipeline transforma em fiz, não fiz ou aguardando |
 | Painel por comunidade (taxa de "fiz", água economizada, alertas, risco) | dados prontos na Área 2; o painel em Power BI está em montagem |
-| Risco de doença, geada e calor | indicadores do clima na Área 2; o modelo de risco é da Área 1 |
-| Aviso por WhatsApp, SMS e áudio | parte da visão; no MVP, o aviso aparece no app |
+| Risco de doença, geada e calor | **pronto**: regras da Área 1 sobre a previsão de 3 dias, com os mesmos limites do painel da Área 2 |
+| Aviso por WhatsApp, SMS e áudio | a IA já devolve o texto pronto para o WhatsApp (`mensagemWhatsapp`); no MVP, o aviso aparece no app |
 
 ## Quem é o cidadão
 
@@ -29,7 +29,7 @@ Os números que sustentam o problema:
 | Dado | Fonte |
 |---|---|
 | 77% dos estabelecimentos rurais do Brasil são de agricultura familiar (3.897.408) | IBGE, Censo Agropecuário 2017 |
-| Só cerca de 20% dos estabelecimentos recebem orientação técnica | IBGE, Censo Agropecuário 2017 (Atlas do Espaço Rural) |
+| Só cerca de 20% dos estabelecimentos recebem orientação técnica, um índice parado há mais de 20 anos: 19,5% no Censo 1995/96, 22,1% em 2006 e 20,2% em 2017 | IBGE, Atlas do Espaço Rural Brasileiro (texto sobre assistência técnica, com os Censos Agropecuários) |
 | A irrigação responde por 50,5% da água retirada no Brasil | ANA, Conjuntura dos Recursos Hídricos 2023 |
 
 Quem mais precisaria de orientação para usar água é quem menos recebe.
@@ -55,16 +55,19 @@ Dois sensores no canteiro (umidade do solo e temperatura do ar, mais um sensor d
 
 ## Como medimos o antes e o depois
 
-A medição é por simulação, com clima real (dados históricos do Open-Meteo para Ibiúna) e o mesmo canteiro nos dois casos:
+A medição é por simulação, com clima real: os 7 canteiros do histórico da Área 2 (670 m² no total), por 60 dias com o clima de Ibiúna de 01/09 a 30/10/2025 (Open-Meteo), período que o modelo da IA nunca viu. Mesmo solo, mesmo sensor e mesmo clima nos três casos. Detalhe e código em `area1-ia/` (`python avaliar.py`).
 
-| Métrica | Antes (rega por calendário: 30 min todo dia) | Depois (rega pela recomendação) |
-|---|---|---|
-| Água por m² em 60 dias | medida na Área 1 | medida na Área 1 |
-| Dias com o solo abaixo do mínimo (planta sofrendo) | medida na Área 1 | medida na Área 1 |
-| Acerto da decisão contra o balanço hídrico de referência (FAO-56) | não se aplica | medida na Área 1 |
-| Tempo para decidir | depende do olho do produtor | 1 toque |
+| Métrica | Antes: calendário (30 min todo dia) | Regra básica (só o sensor) | Depois: IA (sensor e previsão) |
+|---|---:|---:|---:|
+| Água em 60 dias | 279.000 L (416 L/m²) | 109.915 L | **108.065 L (161 L/m²), 61% menos** |
+| Água perdida (escorreu com o solo cheio ou com chuva logo depois) | 146.535 L | 9.379 L | **3.413 L** |
+| Horas com o solo abaixo do mínimo (planta sofrendo) | 0 (o calendário encharca) | 4.967 (49% das horas) | **581 (5,8% das horas)** |
+| Acerto do alerta (na manhã seguinte, solo no ponto e rega sem perda) | não se aplica | 49,9% | **98,3%** |
+| Tempo para decidir | depende do olho do produtor | 1 toque | 1 toque |
 
-A hipótese, que ainda não é resultado, é gastar 25% menos água sem aumentar os dias de estresse. O número final é o da simulação, seja ele qual for.
+A hipótese era gastar 25% menos água sem deixar a planta sofrer. O resultado: **61% menos água** que o calendário. A planta passa 5,8% das horas um pouco abaixo do mínimo, contra 0% no calendário, que nunca deixa secar porque encharca e perde metade da água. Contra a regra básica, que também economiza, a IA corta as horas de sofrimento em 88%. Pelas respostas "1 fiz / 2 não fiz": quando o produtor seguiu o aviso, ele acertou em 92,7% das vezes; quando não seguiu, em 22,0%.
+
+Limites: a planta e o solo são simulados (o clima é real), e a avaliação usa como "previsão" o clima que de fato aconteceu; previsão de verdade erra, então o ganho real tende a ser um pouco menor.
 
 ## Fora do cenário ideal
 
