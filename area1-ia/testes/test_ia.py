@@ -4,6 +4,7 @@
 
 Cada caso tem o codigo do plano de testes (docs/plano-de-testes.md).
 """
+import http.client
 import json
 import os
 import sys
@@ -110,13 +111,22 @@ class TesteServico(unittest.TestCase):
             return erro.code, json.loads(erro.read())
 
     def test_ct34_servico_responde_no_contrato_da_api(self):
-        """CT34 - POST /recomendar devolve regar, minutos, explicacao e chuvaPrevistaMm (o contrato da API)"""
+        """CT34 - POST /recomendar devolve regar, minutos, explicacao e chuvaPrevistaMm (o contrato da API), tambem com o corpo em pedacos, como a API manda"""
         status, corpo = self._post(PEDIDO)
         self.assertEqual(status, 200)
         for campo in ("regar", "minutos", "explicacao", "chuvaPrevistaMm", "mensagemWhatsapp"):
             self.assertIn(campo, corpo)
         with urllib.request.urlopen(f"{self.url}/saude", timeout=5) as r:
             self.assertEqual(json.loads(r.read())["status"], "UP")
+        # a API em Java (Spring 6) manda o corpo em pedacos, sem Content-Length: tem de funcionar igual
+        conexao = http.client.HTTPConnection("127.0.0.1", self.servidor.server_address[1], timeout=10)
+        pedacos = [json.dumps(PEDIDO).encode()[i:i + 50] for i in range(0, len(json.dumps(PEDIDO)), 50)]
+        conexao.request("POST", "/recomendar", body=iter(pedacos), encode_chunked=True,
+                        headers={"Content-Type": "application/json", "Transfer-Encoding": "chunked"})
+        resposta = conexao.getresponse()
+        self.assertEqual(resposta.status, 200)
+        self.assertIn("explicacao", json.loads(resposta.read()))
+        conexao.close()
 
     def test_ct35_servico_recusa_pedido_invalido(self):
         """CT35 - pedido com umidade 150% e cultura desconhecida volta 400, com os campos"""

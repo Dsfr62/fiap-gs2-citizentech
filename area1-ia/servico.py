@@ -30,6 +30,10 @@ FAIXAS = {   # as mesmas da API: dado fora da faixa volta 400
 MODELO = None
 
 
+class CorpoGrande(Exception):
+    pass
+
+
 def validar(pedido) -> dict:
     """Devolve os campos com problema (vazio = pedido valido)."""
     if not isinstance(pedido, dict):
@@ -90,16 +94,43 @@ class Tratador(BaseHTTPRequestHandler):
         else:
             self._responder(404, {"erro": "rota não encontrada"})
 
+    def _ler_corpo(self) -> bytes:
+        """Le o corpo com Content-Length ou em pedacos (Transfer-Encoding: chunked, como a API em Java manda).
+        Corpo acima de TAMANHO_MAXIMO levanta CorpoGrande."""
+        if "chunked" in self.headers.get("Transfer-Encoding", "").lower():
+            corpo = b""
+            while True:
+                tamanho = int(self.rfile.readline(1024).split(b";")[0].strip() or b"0", 16)
+                if tamanho == 0:
+                    while self.rfile.readline(1024) not in (b"\r\n", b"\n", b""):
+                        pass
+                    return corpo
+                if len(corpo) + tamanho > TAMANHO_MAXIMO:
+                    raise CorpoGrande()
+                corpo += self.rfile.read(tamanho)
+                self.rfile.readline(1024)   # o \r\n depois de cada pedaco
+        tamanho = int(self.headers.get("Content-Length") or 0)
+        if tamanho > TAMANHO_MAXIMO:
+            raise CorpoGrande()
+        return self.rfile.read(tamanho) if tamanho > 0 else b""
+
     def do_POST(self):  # noqa: N802
         if self.path != "/recomendar":
             self._responder(404, {"erro": "rota não encontrada"})
             return
-        tamanho = int(self.headers.get("Content-Length") or 0)
-        if tamanho <= 0 or tamanho > TAMANHO_MAXIMO:
-            self._responder(413 if tamanho > TAMANHO_MAXIMO else 400, {"erro": "corpo vazio ou grande demais"})
+        try:
+            corpo = self._ler_corpo()
+        except CorpoGrande:
+            self._responder(413, {"erro": "corpo grande demais"})
+            return
+        except ValueError:
+            self._responder(400, {"erro": "corpo mal formado"})
+            return
+        if not corpo:
+            self._responder(400, {"erro": "corpo vazio"})
             return
         try:
-            pedido = json.loads(self.rfile.read(tamanho).decode("utf-8"))
+            pedido = json.loads(corpo.decode("utf-8"))
         except (ValueError, UnicodeDecodeError):
             self._responder(400, {"erro": "JSON inválido"})
             return
