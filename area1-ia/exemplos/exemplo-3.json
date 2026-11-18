@@ -1,0 +1,40 @@
+{
+  "situacao": "Tempo abafado, com risco de doença nas folhas",
+  "manha": "2025-10-16T06:00:00",
+  "entrada": {
+    "canteiroId": 1,
+    "cultura": "FOLHOSA",
+    "areaM2": 120,
+    "vazaoLitrosMin": 30,
+    "latitude": -23.6566,
+    "longitude": -47.2229,
+    "luminosidade": 0,
+    "umidadeMinima": 45,
+    "umidadeSolo": 58.0,
+    "temperaturaAr": 14.2
+  },
+  "previsao_24h": {
+    "chuva_24h": 0.0,
+    "et0_24h": 4.97,
+    "temp_max_24h": 27.8,
+    "umidade_ar_24h": 81.7
+  },
+  "saida": {
+    "regar": true,
+    "minutos": 14,
+    "explicacao": "Regue 14 minutos hoje, no fim da tarde (cerca de 415 litros). O solo está com 58% de umidade e deve cair para 46% até amanhã, perto do mínimo de 45% para folhosas. Tempo úmido no sábado, com risco alto de doença nas folhas (ferrugem e míldio): olhe as folhas de baixo e regue no pé, sem molhar as folhas.",
+    "chuvaPrevistaMm": 0.0,
+    "litros": 415.0,
+    "umidadePrevista24h": 46.4,
+    "riscos": [
+      {
+        "tipo": "doenca",
+        "nivel": "alto",
+        "data": "2025-10-18",
+        "valor": 16
+      }
+    ],
+    "mensagemWhatsapp": "Regue 14 minutos hoje, no fim da tarde (cerca de 415 litros). O solo está com 58% de umidade e deve cair para 46% até amanhã, perto do mínimo de 45% para folhosas. Tempo úmido no sábado, com risco alto de doença nas folhas (ferrugem e míldio): olhe as folhas de baixo e regue no pé, sem molhar as folhas. Responda 1 se fez ou 2 se não fez.",
+    "previsao": "clima guardado (o que de fato aconteceu)"
+  }
+}

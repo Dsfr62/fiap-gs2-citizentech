@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Fluxo ponta a ponta do Sereno, de verdade, contra a API rodando:
-# sensor -> API -> alerta -> resposta "1 fiz" -> pipeline (bronze, prata e ouro).
+# sensor -> API -> IA -> alerta -> resposta "1 fiz" -> pipeline (bronze, prata e ouro).
+# Com ESPERA_IA=1, confere que o alerta veio da IA (Area 1) e nao da regra basica.
 # Precisa: a API no ar (docker compose up -d) e o pandas instalado (area2-dados/requirements.txt).
 # O CI roda este mesmo script no job do Docker.
 set -euo pipefail
@@ -38,14 +39,17 @@ cd "$RAIZ/area2-dados"
 python3 pipeline.py --api
 
 echo "6. conferência: o alerta da API chegou à prata com a resposta"
-REGAR="$REGAR" python3 - <<'PY'
+REGAR="$REGAR" ESPERA_IA="${ESPERA_IA:-0}" python3 - <<'PY'
 import os
 import pandas as pd
 a = pd.read_csv("dados/prata/alertas.csv", encoding="utf-8-sig")
 api = a[a["canteiro_chave"].str.startswith("api-")]
 print(api[["canteiro_chave", "momento_local", "regar", "minutos", "decidido_por", "resposta"]].to_string(index=False))
+print("mensagem:", api["explicacao"].iloc[-1])
 assert len(api) >= 1, "nenhum alerta da API chegou à prata"
 if os.environ["REGAR"] == "true":
     assert (api["resposta"] == "fiz").any(), "a rega do Jorge não virou 'fiz' na prata"
-print("OK: sensor -> API -> alerta -> resposta -> pipeline")
+if os.environ["ESPERA_IA"] == "1":
+    assert (api["decidido_por"] == "IA").all(), "o alerta não veio da IA (a API caiu na regra básica)"
+print("OK: sensor -> API -> IA -> alerta -> resposta -> pipeline")
 PY

@@ -71,9 +71,9 @@ jobs:
           cache: pip
           cache-dependency-path: area2-dados/requirements.txt
       - name: Conferir a sintaxe dos scripts
-        run: python -m py_compile area3-mvp/iot/simulador.py area4-devops/resumo_testes.py area2-dados/*.py
-      - name: Instalar o pandas
-        run: pip install -r area2-dados/requirements.txt
+        run: python -m py_compile area3-mvp/iot/simulador.py area4-devops/resumo_testes.py area2-dados/*.py area1-ia/*.py
+      - name: Instalar o pandas e o scikit-learn
+        run: pip install -r area2-dados/requirements.txt -r area1-ia/requirements.txt
       - name: Testes do pipeline (unittest)
         working-directory: area2-dados
         run: python -m unittest discover -s testes -v
@@ -88,6 +88,17 @@ jobs:
             cat saida.txt
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+      - name: IA - treino do modelo (camada prata da Area 2)
+        working-directory: area1-ia
+        run: python treinar.py | tee -a "$GITHUB_STEP_SUMMARY"
+      - name: IA - testes (unittest)
+        working-directory: area1-ia
+        run: python -m unittest discover -s testes -v
+      - name: IA - antes e depois (clima real de 2025) e exemplos de entrada e saida
+        working-directory: area1-ia
+        run: |
+          python avaliar.py >> "$GITHUB_STEP_SUMMARY"
+          { echo ""; echo "### Exemplos de entrada e saida da IA"; echo '```'; python demo.py; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
 
   docker:
     name: Docker (imagem, compose e saude)
@@ -99,9 +110,9 @@ jobs:
         run: |
           echo "DB_SENHA=$(openssl rand -hex 16)" > .env
           echo "JWT_SEGREDO=$(openssl rand -hex 32)" >> .env
-      - name: Montar a imagem da API
-        run: docker compose build api
-      - name: Subir o banco e a API
+      - name: Montar as imagens (API e IA)
+        run: docker compose build
+      - name: Subir o banco, a IA e a API
         run: docker compose up -d
       - name: Esperar a API ficar saudavel (/actuator/health)
         run: |
@@ -112,6 +123,13 @@ jobs:
             sleep 2
           done
           echo "A API nao ficou saudavel em 120 s"; exit 1
+      - name: Esperar a IA ficar saudavel (/saude)
+        run: |
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8001/saude; then echo; echo "IA saudavel"; exit 0; fi
+            sleep 2
+          done
+          echo "A IA nao respondeu em 60 s"; exit 1
       - name: Teste de fumaca no PostgreSQL (login da tecnica e exportacao)
         run: |
           TOKEN=$(curl -fsS -X POST http://localhost:8080/api/auth/login \
@@ -144,7 +162,7 @@ jobs:
         run: pip install -r area2-dados/requirements.txt
       - name: Fluxo ponta a ponta (sensor, API, alerta, fiz e pipeline)
         run: |
-          ./area4-devops/fluxo_ponta_a_ponta.sh | tee fluxo.txt
+          ESPERA_IA=1 ./area4-devops/fluxo_ponta_a_ponta.sh | tee fluxo.txt
           {
             echo "### Fluxo ponta a ponta contra a API no Docker"
             echo '```'
@@ -153,7 +171,7 @@ jobs:
           } >> "$GITHUB_STEP_SUMMARY"
       - name: Logs da API (se algo falhar)
         if: failure()
-        run: docker compose logs api
+        run: docker compose logs api ia
       - name: Derrubar o ambiente
         if: always()
         run: docker compose down -v

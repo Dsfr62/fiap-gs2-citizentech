@@ -1,0 +1,4 @@
+﻿politica,agua_l,agua_perdida_l,horas_abaixo_do_minimo,alertas,acerto_pct,economia_vs_calendario_pct
+Antes: calendário (30 min/dia),279000,146535,0,0,,0.0
+Regra básica (só sensor),109915,9379,4967,413,49.9,60.6
+Depois: IA (sensor + previsão),108065,3413,581,413,98.3,61.3

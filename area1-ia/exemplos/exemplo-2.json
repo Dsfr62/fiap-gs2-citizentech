@@ -1,0 +1,40 @@
+{
+  "situacao": "Solo abaixo do mínimo, mas com chuva forte prevista",
+  "manha": "2025-09-22T06:00:00",
+  "entrada": {
+    "canteiroId": 1,
+    "cultura": "FOLHOSA",
+    "areaM2": 120,
+    "vazaoLitrosMin": 30,
+    "latitude": -23.6566,
+    "longitude": -47.2229,
+    "luminosidade": 0,
+    "umidadeMinima": 45,
+    "umidadeSolo": 42.0,
+    "temperaturaAr": 19.1
+  },
+  "previsao_24h": {
+    "chuva_24h": 22.7,
+    "et0_24h": 1.44,
+    "temp_max_24h": 20.6,
+    "umidade_ar_24h": 93.4
+  },
+  "saida": {
+    "regar": false,
+    "minutos": 0,
+    "explicacao": "Não precisa regar hoje: a chuva prevista até amanhã (23 mm) dá conta. O solo está com 42% de umidade e deve subir para 59% até amanhã, acima do mínimo de 45% para folhosas. Tempo úmido hoje: fique de olho nas folhas de baixo.",
+    "chuvaPrevistaMm": 22.7,
+    "litros": 0.0,
+    "umidadePrevista24h": 59.1,
+    "riscos": [
+      {
+        "tipo": "doenca",
+        "nivel": "médio",
+        "data": "2025-09-22",
+        "valor": 7
+      }
+    ],
+    "mensagemWhatsapp": "Não precisa regar hoje: a chuva prevista até amanhã (23 mm) dá conta. O solo está com 42% de umidade e deve subir para 59% até amanhã, acima do mínimo de 45% para folhosas. Tempo úmido hoje: fique de olho nas folhas de baixo. Responda 1 se fez ou 2 se não fez.",
+    "previsao": "clima guardado (o que de fato aconteceu)"
+  }
+}

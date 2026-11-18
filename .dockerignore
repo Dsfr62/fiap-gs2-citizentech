@@ -1,0 +1,10 @@
+# Contexto de build da IA (area1-ia/Dockerfile) e a raiz: so o que a imagem precisa.
+.git/
+**/node_modules/
+**/.venv/
+**/target/
+**/__pycache__/
+area2-dados/dados/
+area1-ia/modelo/
+area3-mvp/
+.env

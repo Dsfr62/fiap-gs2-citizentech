@@ -25,3 +25,6 @@ area2-dados/dados/
 *.log
 .idea/
 .vscode/
+
+# Modelo da IA (o treinar.py recria)
+area1-ia/modelo/

@@ -1,0 +1,40 @@
+{
+  "situacao": "Dia seco e de sol, solo perto do mínimo",
+  "manha": "2025-10-05T06:00:00",
+  "entrada": {
+    "canteiroId": 1,
+    "cultura": "FOLHOSA",
+    "areaM2": 120,
+    "vazaoLitrosMin": 30,
+    "latitude": -23.6566,
+    "longitude": -47.2229,
+    "luminosidade": 0,
+    "umidadeMinima": 45,
+    "umidadeSolo": 46.0,
+    "temperaturaAr": 17.1
+  },
+  "previsao_24h": {
+    "chuva_24h": 0.0,
+    "et0_24h": 5.43,
+    "temp_max_24h": 28.2,
+    "umidade_ar_24h": 60.4
+  },
+  "saida": {
+    "regar": true,
+    "minutos": 32,
+    "explicacao": "Regue 32 minutos hoje, no fim da tarde (cerca de 960 litros). O solo está com 46% de umidade e deve cair para 35% até amanhã, abaixo do mínimo de 45% para folhosas. Tempo úmido na terça: fique de olho nas folhas de baixo.",
+    "chuvaPrevistaMm": 0.0,
+    "litros": 960.0,
+    "umidadePrevista24h": 34.8,
+    "riscos": [
+      {
+        "tipo": "doenca",
+        "nivel": "médio",
+        "data": "2025-10-07",
+        "valor": 9
+      }
+    ],
+    "mensagemWhatsapp": "Regue 32 minutos hoje, no fim da tarde (cerca de 960 litros). O solo está com 46% de umidade e deve cair para 35% até amanhã, abaixo do mínimo de 45% para folhosas. Tempo úmido na terça: fique de olho nas folhas de baixo. Responda 1 se fez ou 2 se não fez.",
+    "previsao": "clima guardado (o que de fato aconteceu)"
+  }
+}

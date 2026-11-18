@@ -1,4 +1,4 @@
-# Sereno: banco PostgreSQL + API (+ servico de IA quando a Area 1 existir).
+# Sereno: banco PostgreSQL + API (Area 3) + servico de IA (Area 1).
 # Como rodar: area4-devops/README.md. Os segredos vem do arquivo .env (modelo em .env.exemplo).
 services:
 
@@ -22,23 +22,33 @@ services:
     depends_on:
       banco:
         condition: service_healthy
+      ia:
+        condition: service_started   # a API sobe mesmo sem a IA (cai na regra basica)
     environment:
       DB_URL: jdbc:postgresql://banco:5432/sereno
       DB_USUARIO: sereno
       DB_SENHA: ${DB_SENHA}
       JWT_SEGREDO: ${JWT_SEGREDO:?defina JWT_SEGREDO no arquivo .env (modelo em .env.exemplo)}
-      # Enquanto o servico "ia" nao existe, a API cai na regra basica e diz isso na tela.
+      # Se o servico "ia" nao responder, a API cai na regra basica e diz isso na tela.
       IA_URL: http://ia:8001
       CORS_ORIGENS: http://localhost:8081,http://localhost:19006
     ports:
       - "8080:8080"
     restart: unless-stopped
 
-  # Area 1 (IA): entra na proxima etapa, com area1-ia/Dockerfile.
-  # ia:
-  #   build: ./area1-ia
-  #   ports:
-  #     - "8001:8001"
+  # Area 1 (IA): modelo treinado na montagem da imagem, com o pipeline da Area 2.
+  ia:
+    build:
+      context: .
+      dockerfile: area1-ia/Dockerfile
+    ports:
+      - "8001:8001"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/saude', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 20
+    restart: unless-stopped
 
 volumes:
   dados-banco:
