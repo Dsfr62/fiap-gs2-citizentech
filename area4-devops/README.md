@@ -71,9 +71,10 @@ curl http://localhost:8080/actuator/health    # {"status":"UP"}
 
 ## Evidência da execução
 
-- Execução verde na `main` (18/11/2026, os 4 jobs e os 27 casos): https://github.com/Dsfr62/fiap-gs2-citizentech/actions/runs/44239186747
+- Execução verde na `main` (18/11/2026, os 4 jobs e os 37 casos, com a IA no compose): https://github.com/Dsfr62/fiap-gs2-citizentech/actions/runs/44242218109
 - Todas as execuções: https://github.com/Dsfr62/fiap-gs2-citizentech/actions/workflows/ci.yml
-- O que ela mostrou: 15 de 15 casos da API; imagem montada; API saudável em 14 s sobre o PostgreSQL; login da técnica, 3 canteiros exportados e 401 sem token; 5 testes do pipeline; pipeline pelo README; e o fluxo ponta a ponta (3 leituras secas, alerta de 22 min pela regra básica, rega, e o alerta chegando à prata como "fiz").
+- O que ela mostrou: 15 de 15 casos da API; 5 do pipeline e 8 da IA; as imagens da API e da IA montadas; API e IA saudáveis; login da técnica, exportação e 401 sem token; o antes e depois e os exemplos da IA no resumo; e o fluxo ponta a ponta: 3 leituras secas, a API pediu à IA, a IA mandou regar 21 min com aviso de risco de doença, o Jorge regou, e o alerta chegou à prata como "fiz", decidido pela IA.
+- Em 18/11, o CI pegou um defeito real de integração: a API em Java manda o corpo do pedido em pedaços (chunked), e a IA respondia 400. O caso CT27 barrou; o conserto e o CT34 cobrem isso. Antes, um `| tee` sem `pipefail` tinha deixado esse passo verde por engano; o workflow agora roda com `shell: bash` (bash -eo pipefail).
 - Prints para o PDF: o **Summary** da execução (tabela dos 15 casos da API, Docker, pipeline e fluxo) e a lista dos quatro jobs verdes.
 
 ## Ferramentas de IA usadas nesta área
