@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Sereno, GS2 2026/2: entregáveis</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 16mm 15mm; }
+  :root { --verde: #1f6f4a; --verde-claro: #e8f3ec; --tinta: #1d2420; --suave: #5b6660; --linha: #d6ddd8; --pendente: #fff4c2; --pendente-borda: #c9a400; }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; background: #fff; color: var(--tinta); font: 10.5pt/1.45 "Helvetica Neue", Helvetica, Arial, sans-serif; }
+  h1 { font-size: 30pt; line-height: 1.1; margin: 0 0 6px; color: var(--verde); }
+  h2 { font-size: 17pt; margin: 0 0 4px; color: var(--verde); border-bottom: 2px solid var(--verde); padding-bottom: 4px; }
+  h3 { font-size: 12pt; margin: 16px 0 4px; }
+  h3 .pts { float: right; font-weight: 400; color: var(--suave); font-size: 10pt; }
+  p { margin: 0 0 8px; }
+  ul { margin: 0 0 8px; padding-left: 18px; }
+  li { margin-bottom: 3px; }
+  code, pre { font-family: Menlo, Consolas, monospace; font-size: 8.6pt; }
+  pre { background: #f4f6f5; border: 1px solid var(--linha); border-radius: 4px; padding: 8px 10px; white-space: pre-wrap; margin: 0 0 8px; }
+  table { width: 100%; border-collapse: collapse; margin: 4px 0 10px; font-size: 9.2pt; }
+  th, td { border: 1px solid var(--linha); padding: 4px 6px; text-align: left; vertical-align: top; }
+  th { background: var(--verde-claro); }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  tr.destaque td { font-weight: 700; }
+  .pagina { break-before: page; }
+  .sem-quebra { break-inside: avoid; }
+  figure { margin: 6px 0 12px; break-inside: avoid; }
+  figure img { max-width: 100%; max-height: 80mm; border: 1px solid var(--linha); border-radius: 4px; display: block; margin: 0 auto; }
+  figure.larga img { max-height: none; width: 100%; }
+  table.antes td:first-child { width: 30%; }
+  figcaption { font-size: 8.8pt; color: var(--suave); margin-top: 3px; }
+  .fonte { font-size: 8.8pt; color: var(--suave); }
+  .pendente { background: var(--pendente); border: 1.5px dashed var(--pendente-borda); border-radius: 4px; padding: 10px 12px; margin: 6px 0 12px; font-weight: 600; }
+  .capa { height: 255mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .capa .topo { margin-top: 40mm; }
+  .capa .sub { font-size: 15pt; color: var(--suave); margin-bottom: 18mm; }
+  .capa dl { display: grid; grid-template-columns: 38mm 1fr; gap: 6px 10px; margin: 0; font-size: 11pt; }
+  .capa dt { color: var(--suave); }
+  .capa dd { margin: 0; }
+  .indice td:last-child { white-space: nowrap; }
+  .caixa { background: var(--verde-claro); border-radius: 4px; padding: 10px 12px; margin: 6px 0 12px; }
+</style>
+</head>
+<body>
+
+<!-- CAPA -->
+<section class="capa">
+  <div class="topo">
+    <h1>Sereno</h1>
+    <div class="sub">O clima da roça em aviso simples</div>
+    <dl>
+      <dt>Trabalho</dt><dd>Global Solution 2026/2, CitizenTech</dd>
+      <dt>Curso</dt><dd>Engenharia de Software, FIAP, turma 4ESOA</dd>
+      <dt>Tema</dt><dd>Campo: pequeno produtor (ODS 2, 13 e 10)</dd>
+      <dt>Grupo</dt><dd><span class="pendente" style="display:inline-block;margin:0;padding:2px 8px">A ENTRAR: nome do grupo</span></dd>
+      <dt>Integrantes</dt><dd><span class="pendente" style="display:inline-block;margin:0;padding:2px 8px">A ENTRAR: nome completo e RM de cada um</span><br>Eduardo Sávio, RM 97833</dd>
+      <dt>Repositório</dt><dd>https://github.com/Dsfr62/fiap-gs2-citizentech</dd>
+      <dt>Vídeo pitch</dt><dd><span class="pendente" style="display:inline-block;margin:0;padding:2px 8px">A ENTRAR: link público do vídeo</span></dd>
+    </dl>
+  </div>
+  <table class="indice">
+    <tr><th>Parte</th><th>O que este PDF mostra</th><th class="n">Pontos</th></tr>
+    <tr><td>O problema</td><td>quem é o cidadão, a dor, os números e os ODS</td><td class="n"></td></tr>
+    <tr><td>Área 1, IA e automação</td><td>a IA aplicada, o prompt e as regras, entrada e saída, o antes e depois</td><td class="n">4</td></tr>
+    <tr><td>Área 2, Big Data e visualização</td><td>as camadas, a ingestão, o painel e as medidas DAX</td><td class="n">4</td></tr>
+    <tr><td>Área 3, MVP, IoT e experiência digital</td><td>as telas, os sensores, o fluxo completo e a arquitetura</td><td class="n">4</td></tr>
+    <tr><td>Área 4, DevOps, segurança e qualidade</td><td>Git, Docker e CI, segurança e o plano de testes</td><td class="n">3</td></tr>
+    <tr><td>Uso de IA e créditos</td><td>o que foi usado para construir, quem fez o quê</td><td class="n"></td></tr>
+  </table>
+</section>
+
+<!-- PROBLEMA -->
+<section class="pagina">
+  <h2>O problema</h2>
+  <p><strong>Quem é o cidadão:</strong> o agricultor familiar de hortaliças (alface, couve, tomate), com 1 a 5 hectares, que irriga com bomba elétrica e não tem técnico por perto. A persona é o Seu Jorge, 54 anos, 2 ha de folhosas em Ibiúna (SP), celular Android e sinal fraco na roça. Ele rega todo dia no mesmo horário, 30 minutos, "porque sempre foi assim".</p>
+  <p><strong>A dor:</strong> ele decide quando e quanto irrigar no hábito, sem saber a umidade do solo nem se vai chover. Em dia úmido, gasta água e energia à toa; no calor, a folhosa murcha e perde valor. A doença nas folhas aparece tarde, e geada ou calor chegam sem aviso.</p>
+  <table class="sem-quebra">
+    <tr><th>Dado</th><th>Fonte</th></tr>
+    <tr><td>77% dos estabelecimentos rurais do Brasil são de agricultura familiar (3.897.408)</td><td>IBGE, Censo Agropecuário 2017</td></tr>
+    <tr><td>Só cerca de 1 em cada 5 recebe orientação técnica, um índice parado há mais de 20 anos: 19,5% em 1995/96, 22,1% em 2006 e 20,2% em 2017</td><td>IBGE, Atlas do Espaço Rural Brasileiro</td></tr>
+    <tr><td>A irrigação responde por 50,5% da água retirada no Brasil</td><td>ANA, Conjuntura dos Recursos Hídricos 2023</td></tr>
+  </table>
+  <p><strong>A solução:</strong> sensores no canteiro (umidade do solo, temperatura e luz), a previsão do tempo e uma IA viram um aviso curto para o produtor: regar ou não, quantos minutos, e se vem doença, geada ou calor. Ele responde "1 fiz / 2 não fiz", e o técnico da Emater ou da cooperativa acompanha tudo num painel por comunidade.</p>
+  <div class="caixa">
+    <strong>ODS 2</strong> (fome zero e agricultura sustentável): menos perda de safra e uso melhor da água no pequeno produtor.
+    <strong>ODS 13</strong> (ação contra a mudança do clima): aviso antecipado de geada, calor e chuva.
+    <strong>ODS 10</strong> (redução das desigualdades): orientação técnica para quem nunca teve, no celular simples, em português simples.
+  </div>
+  <h3>Arquitetura geral, com as 4 áreas</h3>
+  <figure class="larga">
+    <img src="../arquitetura.svg" alt="Arquitetura geral do Sereno">
+    <figcaption>O sensor manda a leitura à API (Área 3); a API pede a decisão à IA (Área 1) e cai na regra básica se ela não responder; o produtor vê o aviso e responde; o pipeline (Área 2) leva tudo ao painel; Docker, CI e testes (Área 4) cobrem o conjunto.</figcaption>
+  </figure>
+</section>
+
+<!-- AREA 1 -->
+<section class="pagina">
+  <h2>Área 1: IA e automação</h2>
+  <p>Código em <code>area1-ia/</code>. A IA responde todo dia, para cada canteiro: regar hoje? quantos minutos? vem doença, geada ou calor? E diz isso em linguagem simples, pronta para o WhatsApp.</p>
+
+  <h3>IA aplicada <span class="pts">1,5 ponto</span></h3>
+  <ul>
+    <li><strong>O modelo</strong> (<code>treinar.py</code>): floresta aleatória do scikit-learn, treinada com a camada prata da Área 2. Ele prevê quanto a umidade do solo vai mudar nas próximas 24 h se ninguém regar, olhando o sensor agora, a previsão do tempo (chuva, a água que o sol e o vento tiram do solo, máxima e umidade do ar) e a cultura.</li>
+    <li><strong>A decisão</strong> (<code>decisao.py</code>): se a umidade prevista para amanhã fica abaixo do mínimo da cultura mais 3 pontos de folga, regar hoje, com a quantidade que leva o solo ao mínimo mais 10 pontos.</li>
+    <li><strong>A IA no ar</strong> (<code>servico.py</code>): a API em Java chama <code>POST /recomendar</code>; a IA busca a previsão do Open-Meteo e responde. Sem previsão, decide pelo sensor e diz isso; se a IA cair, a API usa a regra básica, e o produtor nunca fica sem resposta.</li>
+  </ul>
+  <table class="sem-quebra">
+    <tr><th>Medida, nos 80 exemplos de teste que o modelo nunca viu</th><th class="n">Erro médio em 24 h (pontos de umidade)</th></tr>
+    <tr><td>Supor que nada muda</td><td class="n">5,06</td></tr>
+    <tr class="destaque"><td>Modelo (floresta aleatória), R² 0,83</td><td class="n">1,77</td></tr>
+    <tr><td>Gabarito: a fórmula do próprio simulador</td><td class="n">1,17</td></tr>
+  </table>
+  <p class="fonte">Treina nos primeiros 42 dias e mede nos 18 últimos. O que mais pesa: a chuva prevista (53%), a umidade de agora (34%) e a água que o sol tira (7%).</p>
+  <figure>
+    <img src="../prints/a1-testes-da-ia.jpg" alt="Testes da IA no GitHub Actions">
+    <figcaption>Os 8 casos da IA (CT28 a CT35) passando no GitHub Actions: regar no seco, segurar com chuva, decidir sem previsão, os riscos, a mensagem, o modelo contra "nada muda", o contrato com a API e o pedido inválido.</figcaption>
+  </figure>
+
+  <h3 class="pagina">Prompt e regras documentados <span class="pts">1 ponto</span></h3>
+  <p>Documento completo em <code>area1-ia/prompts/mensagem-ao-produtor.md</code>. No MVP, o texto sai de <code>mensagem.py</code>, que segue estas regras sem chamar um modelo de linguagem: sem chave, sem custo e com a mesma saída para a mesma entrada, o que deixa testar (CT32). O prompt está pronto para trocar a regra por um modelo de linguagem, com a mesma entrada.</p>
+  <pre>Você escreve avisos de rega e de clima para pequenos produtores rurais do Brasil, que leem pouco
+e recebem a mensagem no WhatsApp ou por SMS. Escreva em português simples, como um vizinho que
+entende de roça.
+
+Regras:
+1. A primeira frase é a ação: "Regue N minutos hoje, no fim da tarde (cerca de L litros)." ou
+   "Não precisa regar hoje." Se a chuva prevista der conta, diga isso na mesma frase.
+2. A segunda frase diz o porquê, com no máximo dois números, arredondados (umidade do solo agora
+   e a prevista para amanhã), e o mínimo da cultura.
+3. Se houver risco médio ou alto (doença nas folhas, geada ou calor), uma frase com o dia e o
+   que fazer: olhar as folhas de baixo e regar no pé; cobrir as mudas; regar no fim da tarde.
+   Só o risco mais grave.
+4. Não use palavra técnica: nada de "evapotranspiração", "modelo", "IA", "umidade relativa",
+   "precipitação". Diga "chuva", "sol", "tempo úmido".
+5. No máximo 3 frases. Sem travessão e sem emoji.
+6. Termine com: "Responda 1 se fez ou 2 se não fez."
+7. Use só os dados da entrada. Não invente número nem previsão.</pre>
+  <p><strong>Regras dos riscos</strong> (<code>risco.py</code>), nos próximos 3 dias, com os mesmos limites do painel da Área 2:</p>
+  <table class="sem-quebra">
+    <tr><th>Risco</th><th>Regra</th><th>Médio</th><th>Alto</th></tr>
+    <tr><td>Doença nas folhas (ferrugem, míldio)</td><td>horas no dia com o ar a 95% ou mais e de 15 a 25 °C (folha molhada)</td><td>6 h</td><td>10 h</td></tr>
+    <tr><td>Geada</td><td>temperatura mínima</td><td>6 °C ou menos</td><td>3 °C ou menos</td></tr>
+    <tr><td>Calor</td><td>temperatura máxima</td><td>30 °C ou mais</td><td>32 °C ou mais</td></tr>
+  </table>
+
+  <h3>Demonstração com entrada e saída <span class="pts">0,5 ponto</span></h3>
+  <p><code>python demo.py</code> escolhe três manhãs reais de 2025 e mostra o que entra e o que sai; os JSON completos ficam em <code>area1-ia/exemplos/</code>. O CI roda a demonstração a cada push:</p>
+  <figure>
+    <img src="../prints/a1-entrada-e-saida.jpg" alt="Exemplos de entrada e saída da IA">
+    <figcaption>Dia seco e de sol: regar 32 min. Chuva forte prevista: não regar, "a chuva prevista dá conta". Tempo abafado: regar 14 min, com aviso de risco alto de doença nas folhas.</figcaption>
+  </figure>
+
+  <h3 class="pagina">Lógica e ganho, com métrica antes e depois <span class="pts">1 ponto</span></h3>
+  <p><code>python avaliar.py</code> roda os 7 canteiros por 60 dias com o clima real de Ibiúna de 01/09 a 30/10/2025, período que o modelo nunca viu:</p>
+  <table class="sem-quebra antes">
+    <tr><th>Jeito de regar</th><th class="n">Água (L)</th><th class="n">Economia contra o calendário</th><th class="n">Água perdida (L)</th><th class="n">Horas com o solo abaixo do mínimo</th><th class="n">Acerto do alerta</th></tr>
+    <tr><td>Antes: calendário (30 min por dia)</td><td class="n">279.000</td><td class="n">0,0%</td><td class="n">146.535</td><td class="n">0</td><td class="n"></td></tr>
+    <tr><td>Regra básica (só o sensor)</td><td class="n">109.915</td><td class="n">60,6%</td><td class="n">9.379</td><td class="n">4.967</td><td class="n">49,9%</td></tr>
+    <tr class="destaque"><td>Depois: IA (sensor e previsão)</td><td class="n">108.065</td><td class="n">61,3%</td><td class="n">3.413</td><td class="n">581</td><td class="n">98,3%</td></tr>
+  </table>
+  <ul>
+    <li><strong>Contra o calendário:</strong> 61% menos água. Metade da água do calendário escorre sem a planta usar.</li>
+    <li><strong>Contra a regra básica:</strong> quase a mesma água, mas 88% menos horas com a planta sofrendo e 64% menos água perdida, porque a IA rega antes de secar e segura a rega quando vem chuva.</li>
+    <li><strong>Pelas respostas "1 fiz / 2 não fiz":</strong> com taxa de "fiz" de 75,8%, quando o produtor respondeu "fiz", o alerta acertou em 92,7% das vezes; quando respondeu "não fiz", em 22,0%. Seguir o aviso funciona, medido pela resposta do próprio produtor.</li>
+    <li><strong>Limites, ditos:</strong> a planta e o solo são simulados (o clima é real), e a "previsão" da avaliação é o clima que de fato aconteceu; previsão de verdade erra, então o ganho real tende a ser um pouco menor.</li>
+  </ul>
+  <figure>
+    <img src="../prints/a1-antes-e-depois.jpg" alt="Antes e depois da IA no resumo do CI">
+    <figcaption>A mesma tabela no resumo do GitHub Actions, gerada por <code>python avaliar.py</code> a cada push.</figcaption>
+  </figure>
+</section>
+
+<!-- AREA 2 -->
+<section class="pagina">
+  <h2>Área 2: Big Data e visualização</h2>
+  <p>Código em <code>area2-dados/</code>. A leitura do sensor e a resposta do produtor saem da API, juntam-se ao clima real de Ibiúna e viram, em três camadas, os indicadores do painel do técnico.</p>
+
+  <h3>Modelo de dados em camadas <span class="pts">1 ponto</span></h3>
+  <figure class="larga">
+    <img src="../camadas-de-dados.svg" alt="Camadas de dados bronze, prata e ouro">
+  </figure>
+  <table class="sem-quebra">
+    <tr><th>Camada</th><th>O que tem</th><th>Quem escreve</th></tr>
+    <tr><td><strong>Bronze</strong> (crua)</td><td>a resposta do Open-Meteo e da API como veio, sem mexer; o histórico simulado no mesmo formato da API</td><td><code>ingestao.py</code>, <code>gerador.py</code></td></tr>
+    <tr><td><strong>Prata</strong> (tratada)</td><td>leituras limpas, em hora local, cada uma com o clima da mesma hora; alertas com a resposta; regas; e a contagem do que foi tirado</td><td><code>prata.py</code></td></tr>
+    <tr><td><strong>Ouro</strong> (analítica, modelo estrela)</td><td><code>fato_diario_canteiro</code>, <code>dim_canteiro</code>, <code>alertas</code>, <code>leituras_por_hora</code> e <code>resumo_comunidade</code></td><td><code>ouro.py</code></td></tr>
+  </table>
+
+  <h3>Ingestão e processamento <span class="pts">1 ponto</span></h3>
+  <p><code>python pipeline.py</code> roda as quatro etapas em cerca de 2 segundos: baixa o clima real do Open-Meteo, gera 60 dias de 7 canteiros em 3 comunidades (semente fixa) e, com <code>--api</code>, exporta da API do Sereno logado como a técnica. Na rodada padrão, 10.114 leituras entram na bronze e 235 saem na limpeza:</p>
+  <table class="sem-quebra">
+    <tr><th>Problema no dado cru</th><th>O que a prata faz</th><th class="n">Na rodada padrão</th></tr>
+    <tr><td>valor fora da faixa (umidade 150% ou -1%)</td><td>tira a leitura (mesmas faixas da API)</td><td class="n">39</td></tr>
+    <tr><td>leitura repetida (o sensor reenvia quando o sinal volta)</td><td>fica uma por canteiro e instante</td><td class="n">196</td></tr>
+    <tr><td>dois fusos (UTC na API, -03:00 no sensor, hora local no Open-Meteo)</td><td>tudo vira hora local de São Paulo</td><td class="n">todas</td></tr>
+    <tr><td>horário ilegível</td><td>tira a leitura</td><td class="n">0</td></tr>
+  </table>
+  <p class="fonte">Real: o clima, hora a hora, do Open-Meteo para Ibiúna. Simulado e declarado: a umidade do solo, os defeitos do sensor, os alertas e a resposta de cada produtor. Pessoas, canteiros e comunidades são fictícios.</p>
+
+  <h3 class="pagina">Dashboard com 3 ou mais indicadores e filtros <span class="pts">1,5 ponto</span></h3>
+  <p>Os CSVs da camada ouro, prontos para o Power BI, estão em <code>area2-dados/powerbi/</code>.</p>
+  <table class="sem-quebra">
+    <tr><th>Indicador</th><th>Visual</th><th>De onde vem</th></tr>
+    <tr><td>Taxa de "fiz" por comunidade</td><td>cartão e barras</td><td><code>alertas[resposta]</code></td></tr>
+    <tr><td>Água economizada</td><td>cartão (litros e %) e linha por dia</td><td><code>fato_diario_canteiro[litros_economizados]</code></td></tr>
+    <tr><td>Alertas enviados</td><td>colunas por dia</td><td><code>alertas</code></td></tr>
+    <tr><td>Risco por comunidade</td><td>matriz comunidade e dia</td><td><code>fato_diario_canteiro[risco_doenca]</code></td></tr>
+  </table>
+  <p>Filtros: comunidade, cultura, produtor e período.</p>
+  <div class="pendente">A ENTRAR (Marina): os prints do painel no Power BI, com os indicadores e um filtro aplicado, e o arquivo do painel no .zip.</div>
+
+  <h3>Funções analíticas (DAX) <span class="pts">0,5 ponto</span></h3>
+  <pre>Alertas enviados = COUNTROWS ( alertas )
+
+Respostas fiz = CALCULATE ( COUNTROWS ( alertas ), alertas[resposta] = "fiz" )
+
+Taxa de fiz =
+DIVIDE (
+    [Respostas fiz],
+    CALCULATE ( COUNTROWS ( alertas ), alertas[resposta] IN { "fiz", "não fiz" } )
+)
+
+Água economizada (L) = SUM ( fato_diario_canteiro[litros_economizados] )
+
+Água economizada (%) =
+DIVIDE ( [Água economizada (L)], SUM ( fato_diario_canteiro[litros_calendario] ) )
+
+Horas abaixo do mínimo = SUM ( fato_diario_canteiro[horas_abaixo_do_minimo] )
+
+Dias com risco alto de doença =
+CALCULATE ( DISTINCTCOUNT ( fato_diario_canteiro[data] ), fato_diario_canteiro[risco_doenca] = "alto" )</pre>
+  <p class="fonte">Referência para conferir as medidas, na rodada padrão: taxa de "fiz" de 65% a 81% e água economizada de 60% a 74% por comunidade, num período chuvoso (491 mm em 60 dias).</p>
+</section>
+
+<!-- AREA 3 -->
+<section class="pagina">
+  <h2>Área 3: MVP, IoT e experiência digital</h2>
+  <p>Código em <code>area3-mvp/</code>: a API (Java 17, Spring Boot), o app (Expo, no navegador e no celular) e o IoT (Arduino no TinkerCad e o simulador dos sensores em Python).</p>
+
+  <h3>4 ou mais telas funcionais <span class="pts">1 ponto</span></h3>
+  <p>Cinco telas em <code>area3-mvp/app/src/telas/</code>: Entrar, Meus canteiros, Hoje (a umidade ao vivo, o pedido de recomendação, a mensagem da IA e o "Reguei"), Histórico (a curva da umidade, a água em 7 dias e as regas) e Novo canteiro.</p>
+  <div class="pendente">A ENTRAR (Mazur): os prints das telas do app.</div>
+
+  <h3>2 ou mais sensores <span class="pts">1 ponto</span></h3>
+  <p><code>area3-mvp/iot/sensor_canteiro.ino</code>: umidade do solo, temperatura do ar (TMP36) e luz (LDR), com um LED que acende quando o solo seca, mesmo sem internet. <code>area3-mvp/iot/simulador.py</code> imita o sensor e manda leituras à API, autenticado pela chave do canteiro, nos cenários normal, seco e chuva.</p>
+  <div class="pendente">A ENTRAR (Mazur): o print do circuito no TinkerCad rodando, com o monitor serial.</div>
+
+  <h3>Um fluxo completo, do início ao fim <span class="pts">1 ponto</span></h3>
+  <p>O fluxo: o sensor manda leituras secas, o produtor entra no app, pede a recomendação, a IA manda regar, ele toca em "Reguei", e o pipeline registra o alerta como "fiz". O mesmo fluxo roda sozinho no CI, contra a API no Docker:</p>
+  <figure>
+    <img src="../prints/a4-ci-fluxo-ponta-a-ponta.jpg" alt="Fluxo ponta a ponta no CI">
+    <figcaption>3 leituras de solo seco, login do Jorge, o alerta "regar 21 min, decidido por IA", a rega registrada (1 fiz) e o pipeline bronze, prata e ouro.</figcaption>
+  </figure>
+  <div class="pendente">A ENTRAR (Mazur): os prints do fluxo no app, em sequência (Entrar, Meus canteiros, Hoje com a mensagem da IA, Reguei, Histórico).</div>
+
+  <h3>Arquitetura geral com as 4 áreas <span class="pts">1 ponto</span></h3>
+  <p>O diagrama está na página do problema e em <code>docs/arquitetura.svg</code>.</p>
+</section>
+
+<!-- AREA 4 -->
+<section class="pagina">
+  <h2>Área 4: DevOps, segurança e qualidade</h2>
+
+  <h3>Organizado por módulos e versionado em Git <span class="pts">0,5 ponto</span></h3>
+  <p>Repositório https://github.com/Dsfr62/fiap-gs2-citizentech, uma pasta por área, cada uma com o próprio README de execução: <code>area1-ia/</code>, <code>area2-dados/</code>, <code>area3-mvp/</code> (com <code>api/</code>, <code>app/</code> e <code>iot/</code>), <code>area4-devops/</code> e <code>docs/</code>.</p>
+
+  <h3>Docker e CI funcionando <span class="pts">1 ponto</span></h3>
+  <ul>
+    <li><strong>Docker:</strong> a imagem da API em duas etapas (o JDK 17 monta o <code>.jar</code>, a imagem final leva só o JRE e roda sem root); a da IA treina o modelo na montagem. O <code>docker-compose.yml</code> sobe o PostgreSQL 16, a IA e a API, cada um com teste de saúde.</li>
+    <li><strong>CI (GitHub Actions):</strong> a cada push, quatro jobs: a API em Java (build e JUnit), o app (TypeScript), o Python (pipeline e IA) e o Docker, que monta as imagens, sobe o compose e roda o fluxo ponta a ponta.</li>
+    <li><strong>Monitoramento:</strong> <code>/actuator/health</code> responde <code>UP</code> sem login; o compose e o CI usam essa rota.</li>
+  </ul>
+  <figure>
+    <img src="../prints/a4-ci-summary.jpg" alt="Os quatro jobs verdes do CI">
+    <figcaption>A execução na <code>main</code>: os quatro jobs verdes, em 2 min 43 s.</figcaption>
+  </figure>
+  <figure>
+    <img src="../prints/a4-docker-compose.jpg" alt="Docker compose no CI">
+    <figcaption>No CI: a API saudável, o login da técnica no PostgreSQL, a exportação e o 401 sem token; os três contêineres de pé.</figcaption>
+  </figure>
+
+  <h3 class="pagina">2 ou mais práticas de segurança <span class="pts">0,5 ponto</span></h3>
+  <table>
+    <tr><th>Prática</th><th>Onde</th><th>O que faz</th></tr>
+    <tr><td>Login com token JWT</td><td><code>security/TokenService.java</code></td><td>assina com HMAC-256, expira em 8 h e confere a assinatura e o emissor a cada pedido</td></tr>
+    <tr><td>Senha com hash BCrypt</td><td><code>security/SegurancaConfig.java</code></td><td>a senha vira um hash com sal; nem quem lê o banco descobre a senha</td></tr>
+    <tr><td>Rotas fechadas por padrão e por papel</td><td><code>security/SegurancaConfig.java</code></td><td>só login, cadastro, sensor e saúde ficam abertos; a exportação só para o técnico (CT09, CT15)</td></tr>
+    <tr><td>Validação de entrada</td><td><code>dto/Dtos.java</code></td><td>faixa da umidade, e-mail, tamanho da senha e minutos; dado inválido volta 400 antes do banco (CT05, CT10)</td></tr>
+    <tr><td>Dados do produtor protegidos</td><td><code>service/CanteiroService.java</code></td><td>um produtor não vê o canteiro do outro; responde 404, sem revelar que existe (CT06, CT07)</td></tr>
+    <tr><td>Sensor autenticado por chave</td><td><code>service/LeituraService.java</code></td><td>cada canteiro tem uma chave aleatória; sem ela, a leitura é recusada (CT04)</td></tr>
+    <tr><td>Segredos fora do código</td><td><code>application.properties</code>, <code>docker-compose.yml</code>, <code>.gitignore</code></td><td>o segredo do JWT e a senha do banco vêm de variáveis de ambiente; o CI gera valores novos a cada execução</td></tr>
+    <tr><td>Contêiner sem root e banco fechado</td><td><code>Dockerfile</code>, <code>docker-compose.yml</code></td><td>a API roda como usuário comum; o banco não expõe porta para fora</td></tr>
+    <tr><td>Validação na IA</td><td><code>area1-ia/servico.py</code></td><td>faixas, cultura e coordenadas conferidas; corpo acima de 10 KB recusado; o log não guarda dado do canteiro (CT35)</td></tr>
+  </table>
+  <p class="fonte">Arquivos Java em <code>area3-mvp/api/src/main/java/br/com/fiap/gs2/</code>; arquivo e linha de cada prática no README da Área 4.</p>
+
+  <h3>Plano com 5 ou mais casos de teste e a execução <span class="pts">1 ponto</span></h3>
+  <p>37 casos, todos automáticos e rodando a cada push. Plano completo, com entrada e resultado esperado, em <code>docs/plano-de-testes.md</code>.</p>
+  <table>
+    <tr><th>CT</th><th>O que confere</th><th>Tipo</th><th>Job</th></tr>
+    <tr><td>01</td><td>login com a senha certa devolve token</td><td>integração</td><td>API</td></tr>
+    <tr><td>02</td><td>login com a senha errada devolve 401</td><td>segurança</td><td>API</td></tr>
+    <tr><td>03</td><td>rota protegida sem token devolve 401</td><td>segurança</td><td>API</td></tr>
+    <tr><td>04</td><td>sensor com chave inválida é recusado</td><td>segurança</td><td>API</td></tr>
+    <tr><td>05</td><td>leitura fora da faixa volta 400</td><td>validação</td><td>API</td></tr>
+    <tr><td>06</td><td>produtor não vê o canteiro do outro (404)</td><td>segurança</td><td>API</td></tr>
+    <tr><td>07</td><td>a lista traz só os canteiros do produtor</td><td>segurança</td><td>API</td></tr>
+    <tr><td>08</td><td>fluxo completo na API: leitura seca, recomendação, rega</td><td>integração</td><td>API</td></tr>
+    <tr><td>09</td><td>exportação só para o técnico (200 e 403)</td><td>segurança</td><td>API</td></tr>
+    <tr><td>10</td><td>cadastro com senha curta volta 400</td><td>validação</td><td>API</td></tr>
+    <tr><td>11</td><td>monitoramento: saúde responde UP sem login</td><td>monitoramento</td><td>API</td></tr>
+    <tr><td>12 a 14</td><td>regra básica: solo úmido, solo seco, dia quente</td><td>unidade</td><td>API</td></tr>
+    <tr><td>15</td><td>exportação sem a chave do sensor; produtor 403</td><td>segurança</td><td>API</td></tr>
+    <tr><td>16</td><td>tipos do app sem erro (TypeScript)</td><td>estático</td><td>App</td></tr>
+    <tr><td>17</td><td>sintaxe dos scripts Python</td><td>estático</td><td>Python</td></tr>
+    <tr><td>18, 19</td><td>imagens montadas; compose sobe e fica saudável</td><td>build e sistema</td><td>Docker</td></tr>
+    <tr><td>20 a 24</td><td>pipeline: limpeza, fuso, "fiz / não fiz", horas e água, semente fixa</td><td>unidade</td><td>Python</td></tr>
+    <tr><td>25</td><td>pipeline pelo README gera os CSVs</td><td>sistema</td><td>Python</td></tr>
+    <tr><td>26</td><td>fumaça no PostgreSQL: login, exportação, 401</td><td>sistema</td><td>Docker</td></tr>
+    <tr><td>27</td><td>ponta a ponta: sensor, API, IA, alerta, rega, pipeline</td><td>sistema</td><td>Docker</td></tr>
+    <tr><td>28 a 33</td><td>IA: seco, chuva, sem previsão, riscos, mensagem, modelo</td><td>unidade</td><td>Python</td></tr>
+    <tr><td>34, 35</td><td>IA: contrato com a API; pedido inválido volta 400</td><td>integração e validação</td><td>Python</td></tr>
+    <tr><td>36</td><td>IA saudável no compose</td><td>monitoramento</td><td>Docker</td></tr>
+    <tr><td>37</td><td>antes e depois e exemplos pelo README</td><td>sistema</td><td>Python</td></tr>
+  </table>
+  <figure>
+    <img src="../prints/a4-testes-da-api.jpg" alt="Os 15 casos da API passando">
+    <figcaption>Os 15 casos da API no resumo do CI: "15 de 15 casos passaram". Os 8 da IA estão na Área 1 e o fluxo ponta a ponta na Área 3.</figcaption>
+  </figure>
+  <p class="fonte">Execução verde na <code>main</code>: https://github.com/Dsfr62/fiap-gs2-citizentech/actions/runs/44242601185</p>
+</section>
+
+<!-- USO DE IA E CREDITOS -->
+<section class="pagina">
+  <h2>Uso de IA generativa e créditos</h2>
+  <p>A regra da GS2 permite usar IA para pesquisar, revisar e explicar, desde que o grupo entenda e revise tudo o que entrega. Esta parte não fala da IA do produto (essa é a Área 1).</p>
+  <table>
+    <tr><th>Ferramenta</th><th>Para quê</th><th>Onde</th><th>Revisado por</th></tr>
+    <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>propor a arquitetura; primeira versão da API, do app, do sketch do Arduino, do simulador e dos testes; explicar cada parte; procurar as fontes do problema</td><td>Área 3 e <code>docs/</code></td><td><span class="pendente" style="display:inline-block;margin:0;padding:2px 6px">A ENTRAR</span></td></tr>
+    <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>primeira versão do Docker, do compose, do CI, do plano de testes, do pipeline, dos testes do pipeline e das medidas DAX; explicar cada parte</td><td>Áreas 2 e 4</td><td>Eduardo Sávio</td></tr>
+    <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>primeira versão do treino, da decisão, dos riscos, da mensagem, do serviço, da avaliação, dos testes e do prompt; comparar modelos; explicar cada parte</td><td>Área 1</td><td>Eduardo Sávio</td></tr>
+  </table>
+  <ul>
+    <li>Os 37 testes automáticos e a execução pelo README conferem o que o código gerado faz.</li>
+    <li>Os números do problema têm fonte pública citada; nenhum dado de mercado foi inventado.</li>
+    <li>As respostas de usuários e os dados dos sensores são de demonstração, e o texto diz isso onde aparecem.</li>
+  </ul>
+
+  <h3>Quem fez o quê</h3>
+  <table>
+    <tr><th>Parte</th><th>Quem</th></tr>
+    <tr><td>Área 1, IA e automação</td><td>Eduardo Sávio</td></tr>
+    <tr><td>Área 2, Big Data e visualização</td><td>Marina (painel); base do pipeline por Eduardo Sávio</td></tr>
+    <tr><td>Área 3, MVP, IoT e experiência digital</td><td>Mazur (telas e TinkerCad); base da API e do app por Eduardo Sávio</td></tr>
+    <tr><td>Área 4, DevOps, segurança e qualidade</td><td>Eduardo Sávio</td></tr>
+    <tr><td>Vídeo pitch</td><td>Gustavo</td></tr>
+  </table>
+  <div class="pendente">A ENTRAR: nomes completos do grupo nesta tabela, e o que cada um mandou.</div>
+
+  <h3>Créditos e reaproveitamento</h3>
+  <ul>
+    <li>A estrutura (API Spring Boot com app Expo) segue a da GS1 do grupo, AgroSat (2026/1), como referência. Nenhum arquivo foi copiado; o código desta GS2 foi escrito do zero.</li>
+    <li>Bibliotecas de terceiros: as listadas em <code>area3-mvp/api/pom.xml</code>, <code>area3-mvp/app/package.json</code>, <code>area1-ia/requirements.txt</code> e <code>area2-dados/requirements.txt</code>, cada uma com a própria licença.</li>
+    <li>Clima: Open-Meteo (https://open-meteo.com/), dados abertos sob CC BY 4.0.</li>
+  </ul>
+</section>
+
+</body>
+</html>

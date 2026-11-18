@@ -28,3 +28,6 @@ area2-dados/dados/
 
 # Modelo da IA (o treinar.py recria)
 area1-ia/modelo/
+
+# PDF da entrega (gerado por docs/pdf/gerar.sh)
+docs/pdf/*.pdf
