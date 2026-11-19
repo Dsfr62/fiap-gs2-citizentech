@@ -14,10 +14,10 @@ O agricultor familiar decide quando irrigar e como se proteger do clima no olho:
 | Pasta | Área | O que tem | Estado |
 |---|---|---|---|
 | [`area1-ia/`](area1-ia/) | 1: IA e automação | modelo de irrigação (scikit-learn), riscos de doença, geada e calor, mensagem em linguagem simples e o antes e depois | **roda pelo README e no CI** |
-| [`area2-dados/`](area2-dados/) | 2: Big Data e visualização | pipeline bronze, prata e ouro com o clima real; CSVs e medidas DAX para o Power BI | **roda pelo README**; painel em montagem |
+| [`area2-dados/`](area2-dados/) | 2: Big Data e visualização | pipeline bronze, prata e ouro com o clima real; CSVs, medidas DAX e o painel no Power BI (`painel/Sereno.pbix`) | **roda pelo README**; painel pronto |
 | [`area3-mvp/`](area3-mvp/) | 3: MVP, IoT e experiência digital | API Spring Boot, app Expo (5 telas), Arduino no TinkerCad e simulador | **roda pelo README** |
 | [`area4-devops/`](area4-devops/) | 4: DevOps, segurança e qualidade | Docker, docker-compose, GitHub Actions, segurança e o fluxo ponta a ponta | **roda pelo README e no CI** |
-| [`docs/`](docs/) | todas | problema, arquitetura, camadas de dados e plano de testes | em andamento |
+| [`docs/`](docs/) | todas | problema, arquitetura, camadas de dados e plano de testes, prints e o PDF da entrega | pronto |
 
 Cada área tem o próprio README, com o passo a passo para rodar.
 
@@ -30,7 +30,7 @@ Cada área tem o próprio README, com o passo a passo para rodar.
 
 ## Vídeo pitch
 
-Link: _a incluir_ (YouTube, Google Drive ou Vimeo, público).
+Link: https://youtu.be/vtIavuJHgBA
 
 ## Uso de IA generativa no desenvolvimento
 
