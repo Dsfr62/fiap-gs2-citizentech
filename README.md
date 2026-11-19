@@ -38,7 +38,7 @@ A regra da GS2 permite usar IA para pesquisar, revisar e explicar, desde que o g
 
 | Ferramenta | Para quê | Onde | Revisado por |
 |---|---|---|---|
-| Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | propor a arquitetura; escrever a primeira versão da API, do app, do sketch do Arduino, do simulador e dos testes; explicar cada parte; procurar fontes dos dados do problema | áreas 3 e `docs/` | _a preencher após a revisão_ |
+| Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | propor a arquitetura; escrever a primeira versão da API, do app, do sketch do Arduino, do simulador e dos testes; explicar cada parte; procurar fontes dos dados do problema | áreas 3 e `docs/` | Eduardo Sávio, 19/11/2026 |
 | Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | escrever a primeira versão do Dockerfile, do docker-compose, do CI, do plano de testes, do pipeline de dados (bronze, prata e ouro), dos testes do pipeline e das medidas DAX; calibrar o indicador de risco de doença no clima real; explicar cada parte | áreas 2 e 4 e `docs/` | Eduardo Sávio, 18/11/2026 |
 | Claude Code (Anthropic, modelo Claude Opus 5.5), no terminal | escrever a primeira versão do treino, da decisão, dos riscos, da mensagem, do serviço, da avaliação de antes e depois, dos testes e do prompt; comparar modelos; explicar cada parte | área 1 | Eduardo Sávio, 18/11/2026 |
 
@@ -55,4 +55,4 @@ Como foi feito:
 
 ## Grupo
 
-Nome do grupo, nomes e RM: no `.txt` da entrega (a incluir).
+**Sereno**: Bruno Reis Lago, Eduardo Sávio Fonseca Resende, Gustavo Vieira da Silva, João Guilherme Mazur Ferreira e Marina da Conceição Pereira. O RM de cada um está no `.txt` da entrega.

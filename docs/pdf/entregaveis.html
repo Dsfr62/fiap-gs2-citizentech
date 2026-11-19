@@ -56,8 +56,8 @@
       <dt>Trabalho</dt><dd>Global Solution 2026/2, CitizenTech</dd>
       <dt>Curso</dt><dd>Engenharia de Software, FIAP, turma 4ESOA</dd>
       <dt>Tema</dt><dd>Campo: pequeno produtor (ODS 2, 13 e 10)</dd>
-      <dt>Grupo</dt><dd><span class="pendente" style="display:inline-block;margin:0;padding:2px 8px">A ENTRAR: nome do grupo</span></dd>
-      <dt>Integrantes</dt><dd><span class="pendente" style="display:inline-block;margin:0;padding:2px 8px">A ENTRAR: nome completo e RM de cada um</span><br>Eduardo Sávio, RM 97833</dd>
+      <dt>Grupo</dt><dd>Sereno</dd>
+      <dt>Integrantes</dt><dd>Bruno Reis Lago<br>Eduardo Sávio Fonseca Resende<br>Gustavo Vieira da Silva<br>João Guilherme Mazur Ferreira<br>Marina da Conceição Pereira<br>(RM de cada um no .txt da entrega)</dd>
       <dt>Repositório</dt><dd>https://github.com/Dsfr62/fiap-gs2-citizentech</dd>
       <dt>Vídeo pitch</dt><dd><span class="pendente" style="display:inline-block;margin:0;padding:2px 8px">A ENTRAR: link público do vídeo</span></dd>
     </dl>
@@ -210,7 +210,7 @@ Regras:
     <tr><td>Alertas enviados</td><td>colunas por dia</td><td><code>alertas</code></td></tr>
     <tr><td>Risco por comunidade</td><td>matriz comunidade e dia</td><td><code>fato_diario_canteiro[risco_doenca]</code></td></tr>
   </table>
-  <p>Filtros: comunidade, cultura, produtor e período.</p>
+  <p>Filtros: comunidade, cultura e período.</p>
   <p>O painel está em <code>area2-dados/painel/Sereno.pbix</code> (e, em texto, no projeto <code>Sereno.pbip</code> da mesma pasta). Ele carrega os CSVs da camada ouro com a localidade inglesa (ponto como decimal), liga as tabelas por <code>canteiro_chave</code> e por um calendário, para o filtro de período valer em todos os visuais.</p>
   <figure class="larga">
     <img src="../prints/a2-powerbi-painel.jpg" alt="Painel do técnico no Power BI">
@@ -359,7 +359,7 @@ CALCULATE ( DISTINCTCOUNT ( fato_diario_canteiro[data] ), fato_diario_canteiro[r
   <p>A regra da GS2 permite usar IA para pesquisar, revisar e explicar, desde que o grupo entenda e revise tudo o que entrega. Esta parte não fala da IA do produto (essa é a Área 1).</p>
   <table>
     <tr><th>Ferramenta</th><th>Para quê</th><th>Onde</th><th>Revisado por</th></tr>
-    <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>propor a arquitetura; primeira versão da API, do app, do sketch do Arduino, do simulador e dos testes; explicar cada parte; procurar as fontes do problema</td><td>Área 3 e <code>docs/</code></td><td><span class="pendente" style="display:inline-block;margin:0;padding:2px 6px">A ENTRAR</span></td></tr>
+    <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>propor a arquitetura; primeira versão da API, do app, do sketch do Arduino, do simulador e dos testes; explicar cada parte; procurar as fontes do problema</td><td>Área 3 e <code>docs/</code></td><td>Eduardo Sávio</td></tr>
     <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>primeira versão do Docker, do compose, do CI, do plano de testes, do pipeline, dos testes do pipeline e das medidas DAX; explicar cada parte</td><td>Áreas 2 e 4</td><td>Eduardo Sávio</td></tr>
     <tr><td>Claude Code (Anthropic, Claude Opus 5.5)</td><td>primeira versão do treino, da decisão, dos riscos, da mensagem, do serviço, da avaliação, dos testes e do prompt; comparar modelos; explicar cada parte</td><td>Área 1</td><td>Eduardo Sávio</td></tr>
   </table>
@@ -372,13 +372,12 @@ CALCULATE ( DISTINCTCOUNT ( fato_diario_canteiro[data] ), fato_diario_canteiro[r
   <h3>Quem fez o quê</h3>
   <table>
     <tr><th>Parte</th><th>Quem</th></tr>
-    <tr><td>Área 1, IA e automação</td><td>Eduardo Sávio</td></tr>
-    <tr><td>Área 2, Big Data e visualização</td><td>Marina (painel); base do pipeline por Eduardo Sávio</td></tr>
-    <tr><td>Área 3, MVP, IoT e experiência digital</td><td>Mazur (telas e TinkerCad); base da API e do app por Eduardo Sávio</td></tr>
-    <tr><td>Área 4, DevOps, segurança e qualidade</td><td>Eduardo Sávio</td></tr>
-    <tr><td>Vídeo pitch</td><td>Gustavo</td></tr>
+    <tr><td>Área 1, IA e automação</td><td>Eduardo Sávio Fonseca Resende</td></tr>
+    <tr><td>Área 2, Big Data e visualização</td><td>Marina da Conceição Pereira (painel); base do pipeline por Eduardo Sávio Fonseca Resende</td></tr>
+    <tr><td>Área 3, MVP, IoT e experiência digital</td><td>João Guilherme Mazur Ferreira e Marina da Conceição Pereira (telas, prints e TinkerCad); base da API e do app por Eduardo Sávio Fonseca Resende</td></tr>
+    <tr><td>Área 4, DevOps, segurança e qualidade</td><td>Eduardo Sávio Fonseca Resende</td></tr>
+    <tr><td>Vídeo pitch</td><td>Gustavo Vieira da Silva</td></tr>
   </table>
-  <div class="pendente">A ENTRAR: nomes completos do grupo nesta tabela, e o que cada um mandou.</div>
 
   <h3>Créditos e reaproveitamento</h3>
   <ul>
