@@ -83,7 +83,11 @@ O arquivo `dados/bronze/simulado/_LEIA.txt` repete isso. Pessoas, canteiros e co
 
 ## Passo 4: o painel no Power BI
 
-Os CSVs prontos estão em `powerbi/` (vírgula entre colunas, ponto nos decimais, UTF-8). Dá para montar o painel sem rodar o Python.
+**O painel pronto está em `painel/Sereno.pbix`**: abra no Power BI Desktop e clique em **Atualizar**. A mesma coisa, em texto (modelo em TMDL e relatório), está no projeto `painel/Sereno.pbip`. Os dois leem os CSVs de `powerbi/` pelo parâmetro **PastaDados** (em Transformar dados > Gerenciar parâmetros); se o repositório estiver em outra pasta, troque o caminho ali.
+
+O que o painel já traz: os quatro CSVs carregados com a localidade inglesa (ponto como decimal), uma tabela `calendario` para o filtro de período valer em todos os visuais, os relacionamentos, as sete medidas do passo 5, quatro cartões, três gráficos e os filtros de comunidade, cultura e período.
+
+Para montar do zero: os CSVs prontos estão em `powerbi/` (vírgula entre colunas, ponto nos decimais, UTF-8). Dá para montar o painel sem rodar o Python.
 
 1. No Power BI (Desktop ou pela web), **Obter dados > Texto/CSV** e carregue os cinco arquivos de `powerbi/`. Se os números vierem errados (ponto lido como milhar), em **Transformar dados**, troque a localidade da coluna para "Inglês (Estados Unidos)".
 2. **Relacionamentos:** `dim_canteiro[canteiro_chave]` 1:N com `fato_diario_canteiro`, `alertas` e `leituras_por_hora`.

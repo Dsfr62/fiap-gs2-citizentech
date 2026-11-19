@@ -1,0 +1,87 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 50,
+            "y": 457.66078988191794
+          },
+          "nodeIndex": "alertas",
+          "nodeLineageTag": "e4ebda34-72d0-453b-b41f-6d80628e44f6",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 250.33690143243351,
+            "y": 300.98125191610006
+          },
+          "nodeIndex": "calendario",
+          "nodeLineageTag": "a8572c7d-777f-4edf-863d-071302350be4",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 419.88274187609107,
+            "y": 457.61295870105641
+          },
+          "nodeIndex": "dim_canteiro",
+          "nodeLineageTag": "c4fa9952-1eb4-4430-bbe4-15e19001d4b4",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 705.3747605056642,
+            "y": 457.51908033276396
+          },
+          "nodeIndex": "fato_diario_canteiro",
+          "nodeLineageTag": "9b7ef2fc-eb33-46f6-bf22-ac3374a78d32",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 408.18802192112025,
+            "y": -50
+          },
+          "nodeIndex": "leituras_por_hora",
+          "nodeLineageTag": "7e0e59e5-6792-4853-b6da-b791235d6290",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

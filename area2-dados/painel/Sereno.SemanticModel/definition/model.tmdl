@@ -1,0 +1,20 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["PastaDados", "dim_canteiro", "fato_diario_canteiro", "alertas", "leituras_por_hora", "calendario"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table alertas
+ref table calendario
+ref table dim_canteiro
+ref table fato_diario_canteiro
+ref table leituras_por_hora
+

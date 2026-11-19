@@ -1,0 +1,24 @@
+relationship 7807294e-5c4a-416e-aa6f-589d68940264
+	fromColumn: fato_diario_canteiro.canteiro_chave
+	toColumn: dim_canteiro.canteiro_chave
+
+relationship 9cb08ed4-2580-409f-ba5b-ce4ca953c37b
+	fromColumn: fato_diario_canteiro.data
+	toColumn: calendario.data
+
+relationship 8e07a371-67e2-4861-9904-8555988854b9
+	fromColumn: alertas.canteiro_chave
+	toColumn: dim_canteiro.canteiro_chave
+
+relationship a7cab53b-89f7-48f1-8847-8ef45135f102
+	fromColumn: alertas.data
+	toColumn: calendario.data
+
+relationship f97ca6aa-fd3b-40c9-a2a3-4cb702791064
+	fromColumn: leituras_por_hora.canteiro_chave
+	toColumn: dim_canteiro.canteiro_chave
+
+relationship 6c579b1f-fedf-4cae-910c-793ccd47ded5
+	fromColumn: leituras_por_hora.data
+	toColumn: calendario.data
+

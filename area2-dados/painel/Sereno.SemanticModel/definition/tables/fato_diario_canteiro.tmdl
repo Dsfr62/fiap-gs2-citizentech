@@ -1,0 +1,272 @@
+table fato_diario_canteiro
+	lineageTag: 9b7ef2fc-eb33-46f6-bf22-ac3374a78d32
+
+	measure 'Água economizada (L)' = SUM ( fato_diario_canteiro[litros_economizados] )
+		formatString: #,0
+		lineageTag: 67caaa5b-f467-4d43-91a3-c22bf9d7c0e6
+
+	measure 'Água economizada (%)' = DIVIDE ( [Água economizada (L)], SUM ( fato_diario_canteiro[litros_calendario] ) )
+		formatString: 0.0%
+		lineageTag: 331146dc-07de-4965-afe1-6839664f172e
+
+	measure 'Horas abaixo do mínimo' = SUM ( fato_diario_canteiro[horas_abaixo_do_minimo] )
+		formatString: #,0
+		lineageTag: 401cfe55-519b-4c9a-bce8-2568b2b2eeff
+
+	measure 'Dias com risco alto de doença' = CALCULATE ( DISTINCTCOUNT ( fato_diario_canteiro[data] ), fato_diario_canteiro[risco_doenca] = "alto" )
+		formatString: #,0
+		lineageTag: 952369f8-43fc-4b50-85eb-c4fa3a0acd62
+
+	column canteiro_chave
+		dataType: string
+		lineageTag: 8ae63aba-5bee-4d41-be1b-9d2126ef24d8
+		summarizeBy: none
+		sourceColumn: canteiro_chave
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 0626dc72-2a8d-4193-88a7-ebe10b924990
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column umidade_media
+		dataType: double
+		formatString: 0.0
+		lineageTag: 97307a5f-724d-4005-8da5-83e1928877a4
+		summarizeBy: average
+		sourceColumn: umidade_media
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_minima_do_dia
+		dataType: double
+		formatString: 0.0
+		lineageTag: 980f13ad-56e8-42ec-9d86-0e5742591c56
+		summarizeBy: min
+		sourceColumn: umidade_minima_do_dia
+
+		annotation SummarizationSetBy = Automatic
+
+	column horas_com_leitura
+		dataType: int64
+		formatString: 0
+		lineageTag: b6508daa-2a23-48f1-be3d-e2534be82046
+		summarizeBy: sum
+		sourceColumn: horas_com_leitura
+
+		annotation SummarizationSetBy = Automatic
+
+	column horas_abaixo_do_minimo
+		dataType: int64
+		formatString: 0
+		lineageTag: 41e31aa8-5d2b-4e1c-9199-d6feaa5566bc
+		summarizeBy: sum
+		sourceColumn: horas_abaixo_do_minimo
+
+		annotation SummarizationSetBy = Automatic
+
+	column temp_max_sensor
+		dataType: double
+		formatString: 0.0
+		lineageTag: f995d4d4-90f6-4e24-8395-c00bd4be6e8a
+		summarizeBy: max
+		sourceColumn: temp_max_sensor
+
+		annotation SummarizationSetBy = Automatic
+
+	column temp_min_sensor
+		dataType: double
+		formatString: 0.0
+		lineageTag: 4d1cbea4-3ff8-4cca-af85-49e3e781d846
+		summarizeBy: min
+		sourceColumn: temp_min_sensor
+
+		annotation SummarizationSetBy = Automatic
+
+	column alertas_enviados
+		dataType: int64
+		formatString: 0
+		lineageTag: 3085269e-b33a-4c70-97c0-cdf497c2f061
+		summarizeBy: sum
+		sourceColumn: alertas_enviados
+
+		annotation SummarizationSetBy = Automatic
+
+	column alertas_para_regar
+		dataType: int64
+		formatString: 0
+		lineageTag: 2e8b7353-c4ce-4ba6-ad6a-5d6b078fa3f3
+		summarizeBy: sum
+		sourceColumn: alertas_para_regar
+
+		annotation SummarizationSetBy = Automatic
+
+	column respostas_fiz
+		dataType: int64
+		formatString: 0
+		lineageTag: 9b8b286c-5d34-4045-a6f0-c51adcecde6b
+		summarizeBy: sum
+		sourceColumn: respostas_fiz
+
+		annotation SummarizationSetBy = Automatic
+
+	column respostas_nao_fiz
+		dataType: int64
+		formatString: 0
+		lineageTag: 00d9f904-b15b-4713-bd29-f1f85fd5ba20
+		summarizeBy: sum
+		sourceColumn: respostas_nao_fiz
+
+		annotation SummarizationSetBy = Automatic
+
+	column respostas_aguardando
+		dataType: int64
+		formatString: 0
+		lineageTag: bd668461-df04-4365-ab79-1afff3ec1706
+		summarizeBy: sum
+		sourceColumn: respostas_aguardando
+
+		annotation SummarizationSetBy = Automatic
+
+	column regas
+		dataType: int64
+		formatString: 0
+		lineageTag: df22e5eb-464c-4bf5-a543-5397a0453b33
+		summarizeBy: sum
+		sourceColumn: regas
+
+		annotation SummarizationSetBy = Automatic
+
+	column minutos_regados
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c90dd31-c3fb-4605-9a7e-744694b0d5b5
+		summarizeBy: sum
+		sourceColumn: minutos_regados
+
+		annotation SummarizationSetBy = Automatic
+
+	column litros_usados
+		dataType: double
+		formatString: #,0
+		lineageTag: e5c91009-080f-4208-b0f7-989971f2455b
+		summarizeBy: sum
+		sourceColumn: litros_usados
+
+		annotation SummarizationSetBy = Automatic
+
+	column chuva_mm
+		dataType: double
+		formatString: 0.0
+		lineageTag: eb96860b-b309-4698-8a2a-6a6574f9bd9b
+		summarizeBy: sum
+		sourceColumn: chuva_mm
+
+		annotation SummarizationSetBy = Automatic
+
+	column et0_mm
+		dataType: double
+		formatString: 0.0
+		lineageTag: 67be8471-81ea-46eb-8d73-331001587104
+		summarizeBy: sum
+		sourceColumn: et0_mm
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_ar_media
+		dataType: double
+		formatString: 0.0
+		lineageTag: 53fab3ba-3912-4bb0-a783-a93e7f1c6b26
+		summarizeBy: average
+		sourceColumn: umidade_ar_media
+
+		annotation SummarizationSetBy = Automatic
+
+	column temp_min_ar
+		dataType: double
+		formatString: 0.0
+		lineageTag: 61629133-11bb-44e3-a28a-40557e5e6c69
+		summarizeBy: min
+		sourceColumn: temp_min_ar
+
+		annotation SummarizationSetBy = Automatic
+
+	column temp_max_ar
+		dataType: double
+		formatString: 0.0
+		lineageTag: 801b8df9-4a18-4863-8698-ab170915d2b8
+		summarizeBy: max
+		sourceColumn: temp_max_ar
+
+		annotation SummarizationSetBy = Automatic
+
+	column horas_favoraveis_doenca
+		dataType: int64
+		formatString: 0
+		lineageTag: 91cca980-5b8c-4e60-8463-dc3ba04c4cea
+		summarizeBy: sum
+		sourceColumn: horas_favoraveis_doenca
+
+		annotation SummarizationSetBy = Automatic
+
+	column risco_doenca
+		dataType: string
+		lineageTag: 2c8c51c7-8da5-40c7-8a6c-8ef6d24d2272
+		summarizeBy: none
+		sourceColumn: risco_doenca
+
+		annotation SummarizationSetBy = Automatic
+
+	column risco_geada
+		dataType: string
+		lineageTag: 21d64db2-7444-40fe-8617-80cb0d663b18
+		summarizeBy: none
+		sourceColumn: risco_geada
+
+		annotation SummarizationSetBy = Automatic
+
+	column risco_calor
+		dataType: string
+		lineageTag: 9a6ac2bf-8b4b-4172-93a0-bf8d72ca5675
+		summarizeBy: none
+		sourceColumn: risco_calor
+
+		annotation SummarizationSetBy = Automatic
+
+	column litros_calendario
+		dataType: double
+		formatString: #,0
+		lineageTag: 4c267b14-6883-4d85-95bc-6169bb16db86
+		summarizeBy: sum
+		sourceColumn: litros_calendario
+
+		annotation SummarizationSetBy = Automatic
+
+	column litros_economizados
+		dataType: double
+		formatString: #,0
+		lineageTag: 829b20cf-af73-41cd-8018-25c274b388eb
+		summarizeBy: sum
+		sourceColumn: litros_economizados
+
+		annotation SummarizationSetBy = Automatic
+
+	partition fato_diario_canteiro = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "fato_diario_canteiro.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalho = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalho, {{"canteiro_chave", type text}, {"data", type date}, {"umidade_media", type number}, {"umidade_minima_do_dia", type number}, {"horas_com_leitura", Int64.Type}, {"horas_abaixo_do_minimo", Int64.Type}, {"temp_max_sensor", type number}, {"temp_min_sensor", type number}, {"alertas_enviados", Int64.Type}, {"alertas_para_regar", Int64.Type}, {"respostas_fiz", Int64.Type}, {"respostas_nao_fiz", Int64.Type}, {"respostas_aguardando", Int64.Type}, {"regas", Int64.Type}, {"minutos_regados", Int64.Type}, {"litros_usados", type number}, {"chuva_mm", type number}, {"et0_mm", type number}, {"umidade_ar_media", type number}, {"temp_min_ar", type number}, {"temp_max_ar", type number}, {"horas_favoraveis_doenca", Int64.Type}, {"risco_doenca", type text}, {"risco_geada", type text}, {"risco_calor", type text}, {"litros_calendario", type number}, {"litros_economizados", type number}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

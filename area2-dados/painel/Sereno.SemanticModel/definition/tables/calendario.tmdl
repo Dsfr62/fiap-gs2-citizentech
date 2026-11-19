@@ -1,0 +1,26 @@
+table calendario
+	lineageTag: a8572c7d-777f-4edf-863d-071302350be4
+
+	column data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 76afd94c-0d52-4fc1-ac73-405742c84b6d
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition calendario = m
+		mode: import
+		source =
+				let
+				    Fonte = fato_diario_canteiro,
+				    Datas = Table.Distinct(Table.SelectColumns(Fonte, {"data"})),
+				    Ordenadas = Table.Sort(Datas, {{"data", Order.Ascending}})
+				in
+				    Ordenadas
+
+	annotation PBI_ResultType = Table
+

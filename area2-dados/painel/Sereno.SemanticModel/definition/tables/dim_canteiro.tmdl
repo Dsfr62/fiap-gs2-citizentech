@@ -1,0 +1,99 @@
+table dim_canteiro
+	lineageTag: c4fa9952-1eb4-4430-bbe4-15e19001d4b4
+
+	column canteiro_chave
+		dataType: string
+		lineageTag: 643f759b-3ae6-4b82-8639-d047ccb90fdd
+		summarizeBy: none
+		sourceColumn: canteiro_chave
+
+		annotation SummarizationSetBy = Automatic
+
+	column canteiro_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 5281fe57-1add-4c65-86cc-e173a698fdc8
+		summarizeBy: none
+		sourceColumn: canteiro_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column origem
+		dataType: string
+		lineageTag: 6ef7fc66-c80f-474a-a3be-e8cb7b57d12b
+		summarizeBy: none
+		sourceColumn: origem
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome
+		dataType: string
+		lineageTag: 1abba152-597a-4f20-99d5-28904d03046e
+		summarizeBy: none
+		sourceColumn: nome
+
+		annotation SummarizationSetBy = Automatic
+
+	column cultura
+		dataType: string
+		lineageTag: 02044815-414f-4a85-939e-a91092192715
+		summarizeBy: none
+		sourceColumn: cultura
+
+		annotation SummarizationSetBy = Automatic
+
+	column produtor
+		dataType: string
+		lineageTag: f1c500aa-abcc-40ef-bbee-d0bf45e106fe
+		summarizeBy: none
+		sourceColumn: produtor
+
+		annotation SummarizationSetBy = Automatic
+
+	column comunidade
+		dataType: string
+		lineageTag: f5df2570-68d6-40e8-a079-1603c33dc87b
+		summarizeBy: none
+		sourceColumn: comunidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column area_m2
+		dataType: double
+		formatString: #,0
+		lineageTag: 495c834c-a0ea-48bc-b540-9ecc9ae53d36
+		summarizeBy: sum
+		sourceColumn: area_m2
+
+		annotation SummarizationSetBy = Automatic
+
+	column vazao_l_min
+		dataType: double
+		formatString: #,0
+		lineageTag: 819a2064-c979-470a-b7fb-b6ad3ed51ebe
+		summarizeBy: none
+		sourceColumn: vazao_l_min
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_minima
+		dataType: double
+		formatString: 0
+		lineageTag: fa6ca102-1092-4645-9e58-2f0a18f395af
+		summarizeBy: none
+		sourceColumn: umidade_minima
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dim_canteiro = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "dim_canteiro.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalho = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalho, {{"canteiro_chave", type text}, {"canteiro_id", Int64.Type}, {"origem", type text}, {"nome", type text}, {"cultura", type text}, {"produtor", type text}, {"comunidade", type text}, {"area_m2", type number}, {"vazao_l_min", type number}, {"umidade_minima", type number}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

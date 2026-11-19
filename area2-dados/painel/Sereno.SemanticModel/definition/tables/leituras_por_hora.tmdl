@@ -1,0 +1,105 @@
+table leituras_por_hora
+	lineageTag: 7e0e59e5-6792-4853-b6da-b791235d6290
+
+	column canteiro_chave
+		dataType: string
+		lineageTag: 4edfb2cc-f7af-4218-ab73-860dd886aaa4
+		summarizeBy: none
+		sourceColumn: canteiro_chave
+
+		annotation SummarizationSetBy = Automatic
+
+	column hora_local
+		dataType: dateTime
+		formatString: dd/MM/yyyy HH:mm
+		lineageTag: 54247837-0668-427c-8e0c-f88acf389be0
+		summarizeBy: none
+		sourceColumn: hora_local
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_solo
+		dataType: double
+		formatString: 0.0
+		lineageTag: e4eb7dfe-a565-4d2b-8888-68e37a1ad4f9
+		summarizeBy: average
+		sourceColumn: umidade_solo
+
+		annotation SummarizationSetBy = Automatic
+
+	column temperatura_ar
+		dataType: double
+		formatString: 0.0
+		lineageTag: b07b2131-20c9-4644-93b3-1d3992ba8833
+		summarizeBy: average
+		sourceColumn: temperatura_ar
+
+		annotation SummarizationSetBy = Automatic
+
+	column luminosidade
+		dataType: double
+		formatString: 0.0
+		lineageTag: 320960c7-33f7-484a-87cb-7aa63d82afab
+		summarizeBy: average
+		sourceColumn: luminosidade
+
+		annotation SummarizationSetBy = Automatic
+
+	column chuva_mm
+		dataType: double
+		formatString: 0.0
+		lineageTag: 9924c8e6-2e8e-4136-ae36-269a779d28b5
+		summarizeBy: sum
+		sourceColumn: chuva_mm
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_ar
+		dataType: double
+		formatString: 0
+		lineageTag: b96ff215-017d-48ed-84fe-d7a89ba33a6d
+		summarizeBy: average
+		sourceColumn: umidade_ar
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_minima
+		dataType: double
+		formatString: 0
+		lineageTag: aaf0beb0-ddab-45ea-bc4e-d23c52c12f62
+		summarizeBy: average
+		sourceColumn: umidade_minima
+
+		annotation SummarizationSetBy = Automatic
+
+	column abaixo_do_minimo
+		dataType: boolean
+		lineageTag: 79c2f1ae-5e95-46c1-9be5-0ebd2af01484
+		summarizeBy: none
+		sourceColumn: abaixo_do_minimo
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 9065ee33-f9c4-42ef-b352-55193241f959
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition leituras_por_hora = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "leituras_por_hora.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalho = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalho, {{"canteiro_chave", type text}, {"hora_local", type datetime}, {"umidade_solo", type number}, {"temperatura_ar", type number}, {"luminosidade", type number}, {"chuva_mm", type number}, {"umidade_ar", type number}, {"umidade_minima", type number}, {"abaixo_do_minimo", type logical}, {"data", type date}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+

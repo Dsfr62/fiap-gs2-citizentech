@@ -40,6 +40,9 @@
   .capa dd { margin: 0; }
   .indice td:last-child { white-space: nowrap; }
   .caixa { background: var(--verde-claro); border-radius: 4px; padding: 10px 12px; margin: 6px 0 12px; }
+  .telas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm 5mm; align-items: start; margin: 6px 0 12px; }
+  .telas figure { margin: 0; }
+  .telas figure img { max-height: none; width: 100%; }
 </style>
 </head>
 <body>
@@ -208,7 +211,15 @@ Regras:
     <tr><td>Risco por comunidade</td><td>matriz comunidade e dia</td><td><code>fato_diario_canteiro[risco_doenca]</code></td></tr>
   </table>
   <p>Filtros: comunidade, cultura, produtor e período.</p>
-  <div class="pendente">A ENTRAR (Marina): os prints do painel no Power BI, com os indicadores e um filtro aplicado, e o arquivo do painel no .zip.</div>
+  <p>O painel está em <code>area2-dados/painel/Sereno.pbix</code> (e, em texto, no projeto <code>Sereno.pbip</code> da mesma pasta). Ele carrega os CSVs da camada ouro com a localidade inglesa (ponto como decimal), liga as tabelas por <code>canteiro_chave</code> e por um calendário, para o filtro de período valer em todos os visuais.</p>
+  <figure class="larga">
+    <img src="../prints/a2-powerbi-painel.jpg" alt="Painel do técnico no Power BI">
+    <figcaption>O painel do técnico, sem filtro: taxa de "fiz" de 71,9%, água economizada de 67,4% contra a rega por calendário, 420 alertas e 22 dias com risco alto de doença nos 60 dias. A taxa por comunidade bate com o resumo do pipeline (70,6%, 80,7% e 65,0%).</figcaption>
+  </figure>
+  <figure class="larga">
+    <img src="../prints/a2-powerbi-filtro-pinhal.jpg" alt="Painel filtrado pela comunidade Pinhal">
+    <figcaption>Com o filtro na comunidade Pinhal: 80,7% de "fiz" e 73,6% de água economizada. É a decisão que o painel apoia: o técnico vê em qual comunidade os avisos não estão sendo seguidos (Ponte Alta, 65%) e vai até lá primeiro.</figcaption>
+  </figure>
 
   <h3>Funções analíticas (DAX) <span class="pts">0,5 ponto</span></h3>
   <pre>Alertas enviados = COUNTROWS ( alertas )
@@ -240,11 +251,22 @@ CALCULATE ( DISTINCTCOUNT ( fato_diario_canteiro[data] ), fato_diario_canteiro[r
 
   <h3>4 ou mais telas funcionais <span class="pts">1 ponto</span></h3>
   <p>Cinco telas em <code>area3-mvp/app/src/telas/</code>: Entrar, Meus canteiros, Hoje (a umidade ao vivo, o pedido de recomendação, a mensagem da IA e o "Reguei"), Histórico (a curva da umidade, a água em 7 dias e as regas) e Novo canteiro.</p>
-  <div class="pendente">A ENTRAR (Mazur): os prints das telas do app.</div>
+  <p>Os prints abaixo são o app rodando no navegador, ligado à API e à IA, com o simulador mandando leituras de solo seco do canteiro de alface. Estão na ordem do fluxo completo.</p>
+  <div class="telas">
+    <figure><img src="../prints/a3-app-01-entrar.jpg" alt="Tela Entrar"><figcaption>1. Entrar, como o produtor Jorge.</figcaption></figure>
+    <figure><img src="../prints/a3-app-02-canteiros.jpg" alt="Tela Meus canteiros"><figcaption>2. Meus canteiros: a alface aparece com "solo seco", 41%.</figcaption></figure>
+    <figure><img src="../prints/a3-app-03-hoje-ao-vivo.jpg" alt="Tela Hoje com o sensor ao vivo"><figcaption>3. Hoje: o sensor ao vivo (umidade, temperatura e sol), abaixo do mínimo de 45%.</figcaption></figure>
+    <figure><img src="../prints/a3-app-04-recomendacao-da-ia.jpg" alt="Recomendação da IA"><figcaption>4. Pedir recomendação: a IA manda regar 20 min, explica o porquê e avisa do risco de doença no sábado.</figcaption></figure>
+    <figure><img src="../prints/a3-app-05-reguei.jpg" alt="Rega registrada"><figcaption>5. Reguei: a rega fica registrada, em minutos e litros.</figcaption></figure>
+    <figure><img src="../prints/a3-app-06-historico.jpg" alt="Tela Histórico"><figcaption>6. Histórico: a curva da umidade (laranja abaixo do mínimo), a água em 7 dias e as regas.</figcaption></figure>
+  </div>
 
   <h3>2 ou mais sensores <span class="pts">1 ponto</span></h3>
   <p><code>area3-mvp/iot/sensor_canteiro.ino</code>: umidade do solo, temperatura do ar (TMP36) e luz (LDR), com um LED que acende quando o solo seca, mesmo sem internet. <code>area3-mvp/iot/simulador.py</code> imita o sensor e manda leituras à API, autenticado pela chave do canteiro, nos cenários normal, seco e chuva.</p>
-  <div class="pendente">A ENTRAR (Mazur): o print do circuito no TinkerCad rodando, com o monitor serial.</div>
+  <figure class="larga">
+    <img src="../prints/a3-tinkercad-circuito.jpg" alt="Circuito no TinkerCad rodando, com o monitor serial">
+    <figcaption>O circuito no TinkerCad com a simulação rodando: sensor de umidade do solo (A0, ligado pelo pino 7), TMP36 (A1), fotorresistor com resistor de 10 kΩ (A2) e LED no pino 13 com resistor de 220 Ω. O solo em 30,1%, abaixo do mínimo de 45%, acende o LED. O monitor serial mostra uma linha JSON a cada 2 s, no mesmo formato que a API recebe.</figcaption>
+  </figure>
 
   <h3>Um fluxo completo, do início ao fim <span class="pts">1 ponto</span></h3>
   <p>O fluxo: o sensor manda leituras secas, o produtor entra no app, pede a recomendação, a IA manda regar, ele toca em "Reguei", e o pipeline registra o alerta como "fiz". O mesmo fluxo roda sozinho no CI, contra a API no Docker:</p>
@@ -252,7 +274,7 @@ CALCULATE ( DISTINCTCOUNT ( fato_diario_canteiro[data] ), fato_diario_canteiro[r
     <img src="../prints/a4-ci-fluxo-ponta-a-ponta.jpg" alt="Fluxo ponta a ponta no CI">
     <figcaption>3 leituras de solo seco, login do Jorge, o alerta "regar 21 min, decidido por IA", a rega registrada (1 fiz) e o pipeline bronze, prata e ouro.</figcaption>
   </figure>
-  <div class="pendente">A ENTRAR (Mazur): os prints do fluxo no app, em sequência (Entrar, Meus canteiros, Hoje com a mensagem da IA, Reguei, Histórico).</div>
+  <p>No app, o mesmo fluxo está nos prints 1 a 6 da seção de telas, rodando na máquina com a API, a IA e o simulador ligados, seguindo o README da Área 3.</p>
 
   <h3>Arquitetura geral com as 4 áreas <span class="pts">1 ponto</span></h3>
   <p>O diagrama está na página do problema e em <code>docs/arquitetura.svg</code>.</p>

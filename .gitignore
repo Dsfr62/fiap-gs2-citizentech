@@ -31,3 +31,6 @@ area1-ia/modelo/
 
 # PDF da entrega (gerado por docs/pdf/gerar.sh)
 docs/pdf/*.pdf
+
+# Power BI: cache e configuracoes locais do projeto (PBIP)
+area2-dados/painel/**/.pbi/

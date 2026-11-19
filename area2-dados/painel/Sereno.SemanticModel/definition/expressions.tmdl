@@ -1,0 +1,5 @@
+expression PastaDados = "C:\Users\Marina\study\fiap-gs2-citizentech\area2-dados\powerbi\" meta [IsParameterQuery = true, Type = "Text", IsParameterQueryRequired = true]
+	lineageTag: add5499c-e786-4eb7-b89c-a70240bba591
+
+	annotation PBI_ResultType = Text
+

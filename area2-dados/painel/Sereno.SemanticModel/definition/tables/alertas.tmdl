@@ -1,0 +1,135 @@
+table alertas
+	lineageTag: e4ebda34-72d0-453b-b41f-6d80628e44f6
+
+	measure 'Alertas enviados' = COUNTROWS ( alertas )
+		formatString: #,0
+		lineageTag: 63afb415-da37-4455-9eea-86ff0ae078a2
+
+	measure 'Respostas fiz' = CALCULATE ( COUNTROWS ( alertas ), alertas[resposta] = "fiz" )
+		formatString: #,0
+		lineageTag: 2301fdc0-22d8-4e82-a1fd-1d6f897b3a0a
+
+	measure 'Taxa de fiz' =
+			DIVIDE (
+			    [Respostas fiz],
+			    CALCULATE ( COUNTROWS ( alertas ), alertas[resposta] IN { "fiz", "não fiz" } )
+			)
+		formatString: 0.0%
+		lineageTag: 9ee03304-2848-4c23-bd17-98f930637fc9
+
+	column alerta_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 199f6f27-87db-46d6-bd19-9e5eb2524589
+		summarizeBy: none
+		sourceColumn: alerta_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column canteiro_chave
+		dataType: string
+		lineageTag: 13ddedcd-5560-4e0f-9563-36e13404e371
+		summarizeBy: none
+		sourceColumn: canteiro_chave
+
+		annotation SummarizationSetBy = Automatic
+
+	column data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		lineageTag: 7c5e7d84-a4e2-45fb-95c5-5cafe643b9c8
+		summarizeBy: none
+		sourceColumn: data
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column hora
+		dataType: string
+		lineageTag: 0ae69f4a-bcdc-4ebd-9581-d2befc20ea31
+		summarizeBy: none
+		sourceColumn: hora
+
+		annotation SummarizationSetBy = Automatic
+
+	column regar
+		dataType: boolean
+		lineageTag: 7a38c227-9995-48e3-a70c-27d66e8b1fb6
+		summarizeBy: none
+		sourceColumn: regar
+
+		annotation SummarizationSetBy = Automatic
+
+	column minutos
+		dataType: int64
+		formatString: 0
+		lineageTag: 1056d2fd-ca59-4d65-bd4b-f7a683dcceb6
+		summarizeBy: sum
+		sourceColumn: minutos
+
+		annotation SummarizationSetBy = Automatic
+
+	column litros
+		dataType: double
+		formatString: #,0
+		lineageTag: b39da3f1-17ca-41d1-9ecd-005f8fec8e30
+		summarizeBy: sum
+		sourceColumn: litros
+
+		annotation SummarizationSetBy = Automatic
+
+	column chuva_prevista_mm
+		dataType: double
+		formatString: 0.0
+		lineageTag: d11af563-68b6-421d-b9ec-d6e0c93eb7fa
+		summarizeBy: average
+		sourceColumn: chuva_prevista_mm
+
+		annotation SummarizationSetBy = Automatic
+
+	column umidade_solo_usada
+		dataType: double
+		formatString: 0.0
+		lineageTag: 6d7377fb-a689-49bf-b224-0713cc5696a4
+		summarizeBy: average
+		sourceColumn: umidade_solo_usada
+
+		annotation SummarizationSetBy = Automatic
+
+	column decidido_por
+		dataType: string
+		lineageTag: e92c36d8-9f06-41c9-990a-dc7ee283e6ce
+		summarizeBy: none
+		sourceColumn: decidido_por
+
+		annotation SummarizationSetBy = Automatic
+
+	column resposta
+		dataType: string
+		lineageTag: ffe1febb-32a9-4381-bc76-0df6b41d0a11
+		summarizeBy: none
+		sourceColumn: resposta
+
+		annotation SummarizationSetBy = Automatic
+
+	column explicacao
+		dataType: string
+		lineageTag: c9f4d6bf-7715-4e79-a7d6-1de9aa28f4aa
+		summarizeBy: none
+		sourceColumn: explicacao
+
+		annotation SummarizationSetBy = Automatic
+
+	partition alertas = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents(PastaDados & "alertas.csv"), [Delimiter = ",", Encoding = 65001, QuoteStyle = QuoteStyle.Csv]),
+				    Cabecalho = Table.PromoteHeaders(Fonte, [PromoteAllScalars = true]),
+				    Tipos = Table.TransformColumnTypes(Cabecalho, {{"alerta_id", Int64.Type}, {"canteiro_chave", type text}, {"data", type date}, {"hora", type text}, {"regar", type logical}, {"minutos", Int64.Type}, {"litros", type number}, {"chuva_prevista_mm", type number}, {"umidade_solo_usada", type number}, {"decidido_por", type text}, {"resposta", type text}, {"explicacao", type text}}, "en-US")
+				in
+				    Tipos
+
+	annotation PBI_ResultType = Table
+
